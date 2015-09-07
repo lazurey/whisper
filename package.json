@@ -1,0 +1,53 @@
+{
+  "name": "react-scaffolding",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer-stylus": "^0.5.0",
+    "babel": "^4.7.16",
+    "babel-runtime": "^4.7.16",
+    "babelify": "^5.0.4",
+    "browserify": "^9.0.3",
+    "del": "^1.2.0",
+    "gulp": "^3.8.11",
+    "gulp-autoprefixer": "^2.1.0",
+    "gulp-newer": "^0.5.0",
+    "gulp-rename": "^1.2.0",
+    "gulp-streamify": "0.0.5",
+    "gulp-stylus": "^2.0.0",
+    "gulp-uglify": "^1.1.0",
+    "gulp-util": "^3.0.4",
+    "lodash": "^3.6.0",
+    "lodash-deep": "^1.6.0",
+    "merge-stream": "^0.1.8",
+    "react-router": "^0.13.3",
+    "run-sequence": "^1.1.1",
+    "through": "^2.3.6",
+    "through2": "^0.6.3",
+    "vinyl-source-stream": "^1.1.0",
+    "watchify": "^3.0.0"
+  },
+  "dependencies": {
+    "express": "^4.12.3",
+    "react": "^0.13.1"
+  },
+  "browserify": {
+    "transform": [
+      [
+        "babelify",
+        {
+          "experimental": true,
+          "optional": [
+            "runtime"
+          ]
+        }
+      ]
+    ]
+  },
+  "main": "gulpfile.babel.js"
+}
