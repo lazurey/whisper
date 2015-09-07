@@ -1,0 +1,11 @@
+{
+  "browser": {
+    "react": "react"
+  },
+  "browserify": {
+    "transform": [
+      "babelify",
+      "envify"
+    ]
+  }
+}

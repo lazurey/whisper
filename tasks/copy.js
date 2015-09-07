@@ -1,69 +1,28 @@
 import gulp from 'gulp'
-import gutil from 'gulp-util'
-import path from 'path'
-import newer from 'gulp-newer'
 import rename from 'gulp-rename'
-import _ from 'lodash'
-import mergeSteam from 'merge-stream'
 
-import watcher from './libs/watcher'
+const TASK_NAME = 'copy'
 
-
-const defaultConfig = {
-  'files': [
-    {
-      'src': 'src/*.html',
-      'dest': 'public/'
-    }, {
-      'src': 'src/vendor/css/*.css',
-      'dest': 'public/assets/css/'
-    }, {
-      'src': 'src/images/**',
-      'dest': 'public/assets/css/images/'
-    }, {
-      'src': 'src/vendor/font/**',
-      'dest': 'public/assets/font/'
-    }, {
-      'src': 'src/vendor/js/*.js',
-      'dest': 'public/assets/js/'
-    }
-  ]
-};
-
-let conf;
-
-setOptions(); // init
-
-const TASK_NAME = 'copy';
-const task =  gulp.task(TASK_NAME, function () {
-
-  function bundleThis(fileConf = {}) {
-
-    function bundle() {
-      return gulp.src(fileConf.src)
-        .pipe(newer(fileConf.dest))
-        .pipe(gulp.dest(fileConf.dest))
-        .pipe(watcher.pipeTimer(TASK_NAME));
-    }
-
-    if (watcher.isWatching()) {
-      gulp.watch(fileConf.src, function (evt) {
-        bundle();
-      });
-    }
-
-    return bundle()
-  }
-
-  return mergeSteam.apply(gulp, _.map(conf.files, bundleThis));
-
-});
-
-
-task.setOptions = setOptions;
-
-export default task;
-
-function setOptions(opts) {
-  conf = _.merge({}, defaultConfig, opts)
+function copyOnce(fileConf) {
+  return gulp.src(fileConf.src)
+    .pipe(rename((pathObj)=> {
+      if (fileConf.options.flatten) {
+        pathObj.dirname = ''
+      }
+      if (fileConf.options.baseRegExp) {
+        pathObj.dirname = pathObj.dirname.replace(fileConf.options.baseRegExp, '')
+      }
+    }))
+    .pipe(gulp.dest(fileConf.dest))
+    .pipe(gulp.pipeTimer(TASK_NAME))
 }
+
+function copy() {
+  return gulp.autoRegister(TASK_NAME, copyOnce, (config)=> {
+    gulp.watch(config.src, ()=> {
+      copyOnce(config)
+    })
+  })
+}
+
+export default gulp.task(TASK_NAME, copy)

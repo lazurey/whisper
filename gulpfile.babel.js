@@ -1,34 +1,30 @@
-import gulp from 'gulp';
-import gutil from 'gulp-util';
-import watcher from './tasks/libs/watcher';
+import gulp from 'gulp'
+import path from 'path'
+import gutil from 'gulp-util'
+import requireDir from 'require-dir'
+import gulpTaskConfig from './tasks/libs/gulp-task-config'
 
-import clean from './tasks/clean'
-import browserify from './tasks/browserify'
-import copy from './tasks/copy'
-import stylus from './tasks/stylus'
+gulpTaskConfig(gulp)
 
-import build from './tasks/build'
+requireDir('./tasks')
 
-build.setOptions({
+gulp.config('base.src', './src')
+gulp.config('base.dist', './public')
+
+gulp.config('tasks', requireDir('./tasks/config'))
+
+gulp.config('tasks.build', {
   taskQueue: [
     'clean',
     'copy',
     'stylus',
     'browserify'
   ]
-});
+})
 
-if (gutil.env.prod) {
-  process.env.NODE_ENV = 'production';
-}
+gulp.task('dev', () => {
+  gulp.config(gulp.DEV_MODE, true)
+  gulp.start(['build', 'server'])
+})
 
-if (gutil.env.watch) {
-  watcher.setWatcher();
-}
-
-gulp.task('dev', ()=> {
-  watcher.setWatcher();
-  gulp.start(['build']);
-});
-
-gulp.task('default', ['build']);
+gulp.task('default', ['build'])
