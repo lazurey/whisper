@@ -7,9 +7,11 @@ var Header = React.createClass({
       <header>
         <nav>
           <ul>
-            <li><Link className="logo" title="Home" to="/">
-              <span>Home</span>
-            </Link></li>
+            <li>
+            <Link className="logo" title="Home" to="/">
+              <img src="assets/css/images/kizz-logo.png" alt="kizz" />
+            </Link>
+            </li>
           </ul>
         </nav>
       </header>
