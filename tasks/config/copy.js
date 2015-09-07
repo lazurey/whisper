@@ -10,7 +10,7 @@ export default {
     },
     {
       'src': [
-        `${gulp.config('base.src')}/vendor*/*.*`
+        `${gulp.config('base.src')}/vendor/**/*.*`
       ],
       'dest': `${gulp.config('base.dist')}/assets`
     },

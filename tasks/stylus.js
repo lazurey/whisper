@@ -5,7 +5,7 @@ import gulpStylus from 'gulp-stylus'
 const TASK_NAME = 'stylus'
 
 function stylusOnce(fileConf) {
-  return gulp.src(fileConf.src)
+  return gulp.src(fileConf.entry)
     .pipe(gulpStylus(fileConf.options))
     .pipe(gulp.dest(fileConf.dest))
     .pipe(gulp.pipeTimer(TASK_NAME))
