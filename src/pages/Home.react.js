@@ -18,10 +18,10 @@ var Home = React.createClass({
     return (
       <div block={this.$$block} className='container'>
         <Header />
-        <div>
+        <div className="main">
           <div className="personal-page__header pure-g">
             <div className="personal-page__header-avatar pure-u-6-24">
-              <img src="assets/css/images/k-logo.png" alt="avatar" />
+              <img src="assets/images/k-logo.png" alt="avatar" />
             </div>
             <div className="pure-u-12-24">
               <ul className="pure-g">
@@ -57,47 +57,47 @@ var Home = React.createClass({
               <ul className="image-list">
                 <li className="image-list__item pure-u-1-3">
                   <Link className="image-list__link" to="/">
-                    <img className="image-list__image" src="assets/css/images/example.jpg" alt="image" />
+                    <img className="image-list__image" src="assets/images/example.jpg" alt="image" />
                   </Link>
                 </li>
                 <li className="image-list__item pure-u-1-3">
                   <Link className="image-list__link" to="/">
-                    <img className="image-list__image" src="assets/css/images/example.jpg" alt="image" />
+                    <img className="image-list__image" src="assets/images/example.jpg" alt="image" />
                   </Link>
                 </li>
                 <li className="image-list__item pure-u-1-3">
                   <Link className="image-list__link" to="/">
-                    <img className="image-list__image" src="assets/css/images/example.jpg" alt="image" />
+                    <img className="image-list__image" src="assets/images/example.jpg" alt="image" />
                   </Link>
                 </li>
                 <li className="image-list__item pure-u-1-3">
                   <Link className="image-list__link" to="/">
-                    <img className="image-list__image" src="assets/css/images/example.jpg" alt="image" />
+                    <img className="image-list__image" src="assets/images/example.jpg" alt="image" />
                   </Link>
                 </li>
                 <li className="image-list__item pure-u-1-3">
                   <Link className="image-list__link" to="/">
-                    <img className="image-list__image" src="assets/css/images/example.jpg" alt="image" />
+                    <img className="image-list__image" src="assets/images/example.jpg" alt="image" />
                   </Link>
                 </li>
                 <li className="image-list__item pure-u-1-3">
                   <Link className="image-list__link" to="/">
-                    <img className="image-list__image" src="assets/css/images/example.jpg" alt="image" />
+                    <img className="image-list__image" src="assets/images/example.jpg" alt="image" />
                   </Link>
                 </li>
                 <li className="image-list__item pure-u-1-3">
                   <Link className="image-list__link" to="/">
-                    <img className="image-list__image" src="assets/css/images/example.jpg" alt="image" />
+                    <img className="image-list__image" src="assets/images/example.jpg" alt="image" />
                   </Link>
                 </li>
                 <li className="image-list__item pure-u-1-3">
                   <Link className="image-list__link" to="/">
-                    <img className="image-list__image" src="assets/css/images/example.jpg" alt="image" />
+                    <img className="image-list__image" src="assets/images/example.jpg" alt="image" />
                   </Link>
                 </li>
                 <li className="image-list__item pure-u-1-3">
                   <Link className="image-list__link" to="/">
-                    <img className="image-list__image" src="assets/css/images/example.jpg" alt="image" />
+                    <img className="image-list__image" src="assets/images/example.jpg" alt="image" />
                   </Link>
                 </li>
               </ul>

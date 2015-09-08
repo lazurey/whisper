@@ -9,7 +9,7 @@ var Header = React.createClass({
           <ul>
             <li>
             <Link className="logo" title="Home" to="/">
-              <img src="assets/css/images/kizz-logo.png" alt="kizz" />
+              <img src="assets/images/kizz-logo.png" alt="kizz" />
             </Link>
             </li>
           </ul>

@@ -18,11 +18,12 @@
   }
   
   .app-promotion__description {
-    width: 60%;
-    p {
-      font-size: 1.2rem;
-      font-size: 19.2px;
-    }
+    
+  }
+  
+  .app-promotion__link {
+    float: right;
+    padding-top: 20px;
   }
   
   .app-promotion__button {
@@ -30,12 +31,30 @@
     line-height: 50px;
     padding: 0 30px;
     color: $color-text;
-    font-size: 1.2rem;
     font-size: 19.2px;
+    font-size: 1.2rem;
     font-weight: bold;
+    
   }
-  
   .container {
     padding: $padding-small;
+  }
+}
+
+@media screen and (max-width: $screen-max) {
+  .app-promotion {
+    img {
+      width: 60px;
+      height: 60px;
+    }
+    .app-promotion__button {
+      font-size: 1rem;
+      padding: 0 15px;
+      height: 36px;
+      line-height: 36px;
+    }
+    .app-promotion__link {
+      padding-top: 10px;
+    }
   }
 }

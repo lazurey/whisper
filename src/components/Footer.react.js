@@ -7,7 +7,7 @@ var Footer = React.createClass({
         <div className="app-promotion">
           <div className="container">
             <div className="app-promotion__logo">
-              <img src="assets/css/images/k-logo.png" alt="kizz" />
+              <img src="assets/images/k-logo.png" alt="kizz" />
             </div>
             <div className="app-promotion__description">
               <p>KIZZ</p>

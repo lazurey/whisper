@@ -6,7 +6,8 @@ _.mixin(lodashDeep);
 import React from 'react'
 
 import {
-  Home
+  Home,
+  PicShare
 } from './pages'
 
 import {
@@ -28,6 +29,7 @@ const App = React.createClass({
 const rootRoutes = (
   <Route name='app' path="/" handler={App} alt='Home'>
     <DefaultRoute handler={Home}/>
+    <Route name="picshare" handler={PicShare} path="/share/:uid/:pid" />
   </Route>
 );
 
