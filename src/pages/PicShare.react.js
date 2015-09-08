@@ -23,7 +23,7 @@ var PicShare = React.createClass({
             </div>
             <div className="pic-share__info">
               <h3>Bluef</h3>
-              <div className="pic-share__times">被啵<span>3</span>次</div>
+              <div className="pic-share__times"><span className="kizz"></span>被啵<span>3</span>次</div>
             </div>
             <div className="pic-share__follow">
               <button className="btn btn-primary">+ 关注</button>
@@ -32,47 +32,54 @@ var PicShare = React.createClass({
           <div className="pic-share__pic">
             <img src="assets/images/example.jpg" alt="image" />
           </div>
-          <div className="pic-share__share pure-g">
-            <div className="pure-u-4-24">啵</div>
-            <div className="pure-u-16-24">
-              <ul>
-                <li>
-                  <img src="assets/images/example.jpg" alt="userA" />
-                </li>
-              </ul>
+          <div className="pic-share__share">
+            <div className="pure-g">
+              <div className="pic-share__kizz pure-u-6-24"><span className="kizz"></span><span className="kizz-text">啵</span></div>
+              <div className="pure-u-16-24">
+                <ul className="share-user__list">
+                  <li><img src="assets/images/example.jpg" alt="userA" /></li>
+                  <li><img src="assets/images/example.jpg" alt="userA" /></li>
+                  <li><img src="assets/images/example.jpg" alt="userA" /></li>
+                </ul>
+              </div>
+              <div className="pure-u-2-24">
+                <div className="pic-share__count">3</div>
+              </div>
             </div>
-            <div className="pure-u-4-24">3</div>
           </div>
           <div className="pic-share__comment">
             <ul>
               <li className="pic-share__comment-item">
                 <p>
-                  <span className="comment__user">村口王师傅</span>:
+                  <span className="comment__user">村口王师傅</span>：
                   <span className="comment__content">你好，烫头五块钱。</span>
                 </p>
               </li>
               <li className="pic-share__comment-item">
                 <p>
-                  <span className="comment__user">村口王师傅</span>:
+                  <span className="comment__user">村口王师傅</span>：
                   <span className="comment__content">你好，烫头五块钱。</span>
                 </p>
               </li>
               <li className="pic-share__comment-item">
                 <p>
-                  <span className="comment__user">村口王师傅</span>:
+                  <span className="comment__user">村口王师傅</span>：
                   <span className="comment__content">你好，烫头五块钱。</span>
                 </p>
               </li>
               <li className="pic-share__comment-item">
                 <p>
-                  <span className="comment__user">村口王师傅</span>:
+                  <span className="comment__user">村口王师傅</span>：
                   <span className="comment__content">你好，烫头五块钱。</span>
                 </p>
+              </li>
+              <li>
+                <Link to="/">查看全部<span>16</span>条评论</Link>
               </li>
             </ul>
           </div>
           <div className="hot-pic">
-            <h2>热门</h2>
+            <div className="hot-pic__title"><h2>热门精选</h2></div>
             <ul className="image-list">
                 <li className="image-list__item pure-u-1-3">
                   <Link className="image-list__link" to="/">
