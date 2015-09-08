@@ -56,47 +56,47 @@ var Home = React.createClass({
             <li id="tab-tags">
               <ul className="image-list">
                 <li className="image-list__item pure-u-1-3">
-                  <Link className="image-list__link" to="/">
+                  <Link className="image-list__link" to="/share/1/1">
                     <img className="image-list__image" src="assets/images/example.jpg" alt="image" />
                   </Link>
                 </li>
                 <li className="image-list__item pure-u-1-3">
-                  <Link className="image-list__link" to="/">
+                  <Link className="image-list__link" to="/share/1/1">
                     <img className="image-list__image" src="assets/images/example.jpg" alt="image" />
                   </Link>
                 </li>
                 <li className="image-list__item pure-u-1-3">
-                  <Link className="image-list__link" to="/">
+                  <Link className="image-list__link" to="/share/1/1">
                     <img className="image-list__image" src="assets/images/example.jpg" alt="image" />
                   </Link>
                 </li>
                 <li className="image-list__item pure-u-1-3">
-                  <Link className="image-list__link" to="/">
+                  <Link className="image-list__link" to="/share/1/1">
                     <img className="image-list__image" src="assets/images/example.jpg" alt="image" />
                   </Link>
                 </li>
                 <li className="image-list__item pure-u-1-3">
-                  <Link className="image-list__link" to="/">
+                  <Link className="image-list__link" to="/share/1/1">
                     <img className="image-list__image" src="assets/images/example.jpg" alt="image" />
                   </Link>
                 </li>
                 <li className="image-list__item pure-u-1-3">
-                  <Link className="image-list__link" to="/">
+                  <Link className="image-list__link" to="/share/1/1">
                     <img className="image-list__image" src="assets/images/example.jpg" alt="image" />
                   </Link>
                 </li>
                 <li className="image-list__item pure-u-1-3">
-                  <Link className="image-list__link" to="/">
+                  <Link className="image-list__link" to="/share/1/1">
                     <img className="image-list__image" src="assets/images/example.jpg" alt="image" />
                   </Link>
                 </li>
                 <li className="image-list__item pure-u-1-3">
-                  <Link className="image-list__link" to="/">
+                  <Link className="image-list__link" to="/share/1/1">
                     <img className="image-list__image" src="assets/images/example.jpg" alt="image" />
                   </Link>
                 </li>
                 <li className="image-list__item pure-u-1-3">
-                  <Link className="image-list__link" to="/">
+                  <Link className="image-list__link" to="/share/1/1">
                     <img className="image-list__image" src="assets/images/example.jpg" alt="image" />
                   </Link>
                 </li>
