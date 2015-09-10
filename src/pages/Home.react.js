@@ -1,4 +1,5 @@
 var React = require('react'),
+    api = require('../data/api'),
     Header = require('../components/Header.react'),
     Footer = require('../components/Footer.react'),
     Link = require('react-router').Link;
@@ -12,6 +13,12 @@ var Home = React.createClass({
     return {
       routeName: 'Home'
     }
+  },
+
+  componentWillMount() {
+    api.hot_pics({page: 0, size: 1}).then(function(response) {
+      console.log(response);
+    });
   },
 
   render() {
