@@ -30,6 +30,7 @@ const rootRoutes = (
   <Route name='app' path="/" handler={App} alt='Home'>
     <DefaultRoute handler={Home}/>
     <Route name="picshare" handler={PicShare} path="/share/:uid/:pid" />
+    <Route name="person" handler={Home} path="/user/:uid" />
   </Route>
 );
 

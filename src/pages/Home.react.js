@@ -42,8 +42,8 @@ var Home = React.createClass({
   },
 
   componentDidMount() {
-
-    api.user_data({id: 15, type: 2, page: 1, size: 9}).then(function(response) {
+    var uid = this.props.params.uid || 15;
+    api.user_data({id: uid, type: 2, page: 1, size: 9}).then(function(response) {
 
       if (this.isMounted()) {
         if (!response) return;
@@ -58,7 +58,7 @@ var Home = React.createClass({
           liked: userData.LikeCount,
           fans: userData.FansCount,
           follow: userData.WishCount,
-          info: getGender(userData.Gender) + "，" + userData.ProvName + userData.AreaName,
+          info: getGender(userData.Gender) + " " + (userData.ProvName || "") + (userData.AreaName || ""),
           piclist: userData.PicList
         });
       }
@@ -66,7 +66,9 @@ var Home = React.createClass({
   },
 
   render() {
-    var pics = this.state.piclist;
+    var pics = this.state.piclist,
+        uid = this.state.uid;
+
     return (
       <div block={this.$$block} className='container'>
         <Header />
@@ -111,7 +113,7 @@ var Home = React.createClass({
                   _.chain(pics)
                     .uniq()
                     .map(function(pic) {
-                      var pic_share_path = "/share/" + "14" + "/" + pic.PicId;
+                      var pic_share_path = "/share/" + uid + "/" + pic.PicId;
                       var pic_url = IMAGE_BASE_URL + pic.Image;
                       return <li className="image-list__item pure-u-1-3">
                               <Link className="image-list__link" to={pic_share_path}>

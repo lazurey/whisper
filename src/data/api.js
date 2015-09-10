@@ -69,6 +69,7 @@ function endPoint(path, mode, useDefaults) {
 module.exports = {
   // BASIC GET REQUESTS //
   hot_pics: endPoint('/picture/home', 'get'),
-  user_data: endPoint('/picture/account', 'get')
+  user_data: endPoint('/picture/account', 'get'),
+  pic_data: endPoint('/picture/get', 'get')
 
 };
