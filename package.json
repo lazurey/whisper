@@ -11,7 +11,6 @@
   "license": "ISC",
   "devDependencies": {
     "autoprefixer-stylus": "^0.7.1",
-    "babel": "^5.8.23",
     "babel-runtime": "^5.8.20",
     "babelify": "^6.3.0",
     "browser-sync": "^2.9.1",
@@ -40,6 +39,7 @@
     "watchify": "^3.4.0"
   },
   "dependencies": {
+    "babel": "^5.8.23",
     "browserify": "^11.0.1",
     "gulp": "^3.9.0",
     "react-router": "^0.13.3"
