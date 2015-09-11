@@ -42,5 +42,8 @@
     "gulp": "^3.9.0",
     "react-router": "^0.13.3"
   },
+  "engines": {
+    "node": "0.12.x"
+  },
   "main": "gulpfile.babel.js"
 }
