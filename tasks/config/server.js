@@ -21,12 +21,14 @@ export default {
       }
     },
     server: {
+      port: process.env.PORT || 3000,
       baseDir: `${gulp.config('base.dist')}`,
       middleware: [
         process.env.NODE_ENV === 'production' ? compress() : middlewareNope(),
         // proxyTo('/api/v2', url.format(config.get('server')))
       ]
-    }
+    },
+    ui: false
   }
 }
 
