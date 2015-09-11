@@ -9,8 +9,10 @@ function serverOnce(fileConf) {
 
 function server() {
   gulp.autoRegister(TASK_NAME, serverOnce, (config)=> {
-    gulp.watch(config.src)
-      .on('change', browserSync.reload)
+    if (process.env.NODE_ENV !== 'production') {
+      gulp.watch(config.src)
+        .on('change', browserSync.reload)
+    }
   })
 }
 
