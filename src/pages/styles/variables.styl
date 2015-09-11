@@ -19,7 +19,7 @@ $screen-min = 320px
 }
 
 .kizz {
-  background: url('../images/kiss-icon.png');
+  background: url('../images/kiss-icon.png') no-repeat;
   width: 30px;
   height: 30px;
   display: inline-block;
@@ -27,4 +27,12 @@ $screen-min = 320px
 
 .kizz-text {
   color: $color-seconday;
+}
+
+@media screen and (max-width: $screen-mid) {
+  .kizz {
+    width: 20px;
+    height: 20px;
+    background-size: 20px 20px;
+  }
 }
