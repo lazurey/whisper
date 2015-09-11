@@ -2,6 +2,7 @@ var React = require('react'),
     _ = require('lodash'),
     api = require('../data/api'),
     Footer = require('../components/Footer.react'),
+    Comment = require('../components/Comment.react'),
     InfiniteScroll = require('../components/InfiniteScroll.react'),
     Link = require('react-router').Link;
 
@@ -15,6 +16,10 @@ var PicShare = React.createClass({
         if (!response) return;
         
         var data = response.objects.data;
+        
+        console.log("==============");
+        console.log(data);
+        console.log("==============");
 
         this.setState({
           uid: data.AccountId,
@@ -24,6 +29,7 @@ var PicShare = React.createClass({
           avatar: data.Avatar,
           liked: data.LikeCount,
           replies: data.ReplyCount,
+          comments: [data.LastReply1, data.LastReply2, data.LastReply3, data.LastReply4],
           likeList: data.LastLike
         });
       }
@@ -49,6 +55,7 @@ var PicShare = React.createClass({
       nickname: "",
       liked: "",
       replies: 0,
+      comments: [],
       likeList: []
     }
   },
@@ -59,7 +66,7 @@ var PicShare = React.createClass({
     }
   },
 
-  componentDidMount() {
+  componentWillMount() {
     var pid = this.props.params.pid;
     this._load_picture(pid);
   },
@@ -67,6 +74,8 @@ var PicShare = React.createClass({
 
 
   render() {
+    var comment_list = this.state.comments;
+
     var like_list = this.state.likeList;
 
     return (
@@ -111,37 +120,7 @@ var PicShare = React.createClass({
               </div>
             </div>
           </div>
-          <div className="pic-share__comment">
-            <ul>
-              <li className="pic-share__comment-item">
-                <p>
-                  <span className="comment__user">村口王师傅</span>：
-                  <span className="comment__content">你好，烫头五块钱。</span>
-                </p>
-              </li>
-              <li className="pic-share__comment-item">
-                <p>
-                  <span className="comment__user">村口王师傅</span>：
-                  <span className="comment__content">你好，烫头五块钱。</span>
-                </p>
-              </li>
-              <li className="pic-share__comment-item">
-                <p>
-                  <span className="comment__user">村口王师傅</span>：
-                  <span className="comment__content">你好，烫头五块钱。</span>
-                </p>
-              </li>
-              <li className="pic-share__comment-item">
-                <p>
-                  <span className="comment__user">村口王师傅</span>：
-                  <span className="comment__content">你好，烫头五块钱。</span>
-                </p>
-              </li>
-              <li>
-                <Link to="/">查看全部<span>16</span>条评论</Link>
-              </li>
-            </ul>
-          </div>
+          <Comment comments={comment_list} />
           <div className="hot-pic">
             <div className="hot-pic__title"><h2>热门精选</h2></div>
             <InfiniteScroll api="hot_pics" />
