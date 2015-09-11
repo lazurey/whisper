@@ -19,6 +19,7 @@
     "config": "^1.16.0",
     "del": "^2.0.1",
     "envify": "^3.4.0",
+    "express": "^4.13.3",
     "gulp-newer": "^0.5.1",
     "gulp-rename": "^1.2.2",
     "gulp-streamify": "1.0.2",
