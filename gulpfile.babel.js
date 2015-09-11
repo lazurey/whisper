@@ -27,4 +27,6 @@ gulp.task('dev', () => {
   gulp.start(['build', 'server'])
 })
 
+gulp.task("heroku:production", ['build']);
+
 gulp.task('default', ['build'])
