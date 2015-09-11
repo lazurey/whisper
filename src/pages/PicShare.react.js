@@ -18,9 +18,9 @@ var PicShare = React.createClass({
         
         var data = response.objects.data;
         
-        console.log("==============");
-        console.log(data);
-        console.log("==============");
+        // console.log("==============");
+        // console.log(data);
+        // console.log("==============");
 
         this.setState({
           title: data.Nickname + "的照片 | KIZZ",

@@ -1,12 +1,11 @@
 var React = require('react'),
     _ = require('lodash'),
     api = require('../data/api'),
+    tools = require('../utils/tools'),
     Header = require('../components/Header.react'),
     Footer = require('../components/Footer.react'),
     Link = require('react-router').Link,
     DocumentTitle = require('react-document-title');
-
-var IMAGE_BASE_URL = "http://7xkvcu.com1.z0.glb.clouddn.com/";
 
 function getGender(code) {
   if (code == 1) {
@@ -115,7 +114,7 @@ var Home = React.createClass({
               _.chain(pics)
                 .uniq()
                 .map(function(pic) {
-                  var pic_url = IMAGE_BASE_URL + pic.Image + "?vframe/png/offset/1";
+                  var pic_url = tools.get_image_url(pic.Image, pic.Type);
                   return <li className="image-list__item pure-u-1-3">
                           <Link className="image-list__link" to="picshare" params={{uid: user_id, pid: pic.PicId}}>
                             <img className="image-list__image" src={pic_url} alt="image" />

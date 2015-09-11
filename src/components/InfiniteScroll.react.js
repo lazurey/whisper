@@ -1,9 +1,8 @@
 var React = require('react'),
     api = require('../data/api'),
     _ = require('lodash'),
+    tools = require('../utils/tools'),
     Link = require('react-router').Link;
-
-var IMAGE_BASE_URL = "http://7xkvcu.com1.z0.glb.clouddn.com/";
 
 var InfiniteScroll = React.createClass({
   
@@ -42,7 +41,7 @@ var InfiniteScroll = React.createClass({
           _.chain(pics)
             .uniq()
             .map(function(pic) {
-              var pic_url = IMAGE_BASE_URL + pic.Image + "?vframe/png/offset/1";
+              var pic_url = tools.get_image_url(pic.Image, pic.Type);
               return <li className="image-list__item pure-u-1-3">
                       <Link className="image-list__link" to="picshare" params={{uid: pic.AccountId, pid: pic.PictureId}}>
                         <img className="image-list__image" src={pic_url} alt="image" />

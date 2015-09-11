@@ -12,7 +12,6 @@ var Comment = React.createClass({
 
   render() {
     var comments = this.props.comments || [];
-    console.log(comments);
     return <div className="pic-share__comment">
             <ul>
               {
@@ -21,7 +20,7 @@ var Comment = React.createClass({
                   .map(function(comment) {
                     if (!comment) return;
                     return <li className="pic-share__comment-item">
-                            <Link to="person" params={{uid: 15}}>
+                            <Link to="person" params={{uid: comment.AccountId}}>
                               <p>
                                 <span className="comment__user">{comment.Nickname}</span>：
                                 <span className="comment__content">{comment.Content}</span>
