@@ -28,7 +28,7 @@ var InfiniteScroll = React.createClass({
         }
       }.bind(this));
     } else if (api_str === "personal") {
-      
+
     }
 
 
@@ -42,7 +42,7 @@ var InfiniteScroll = React.createClass({
           _.chain(pics)
             .uniq()
             .map(function(pic) {
-              var pic_url = IMAGE_BASE_URL + pic.Image;
+              var pic_url = IMAGE_BASE_URL + pic.Image + "?vframe/png/offset/1";
               return <li className="image-list__item pure-u-1-3">
                       <Link className="image-list__link" to="picshare" params={{uid: pic.AccountId, pid: pic.PictureId}}>
                         <img className="image-list__image" src={pic_url} alt="image" />
