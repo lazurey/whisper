@@ -8,6 +8,7 @@ export default {
   src: [
     `${gulp.config('base.dist')}/{,**/}*.*'`
   ],
+  port: process.env.PORT || 3000，
   options: {
     notify: false,
     logSnippet: false,
@@ -28,7 +29,7 @@ export default {
       ]
     },
     ui: {
-      port: 9999
+      port: process.env.PORT || 9999
     }
   }
 }
