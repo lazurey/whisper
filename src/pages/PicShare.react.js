@@ -4,7 +4,8 @@ var React = require('react'),
     Footer = require('../components/Footer.react'),
     Comment = require('../components/Comment.react'),
     InfiniteScroll = require('../components/InfiniteScroll.react'),
-    Link = require('react-router').Link;
+    Link = require('react-router').Link,
+    DocumentTitle = require('react-document-title');
 
 var IMAGE_BASE_URL = "http://7xkvcu.com1.z0.glb.clouddn.com/";
 
@@ -22,6 +23,7 @@ var PicShare = React.createClass({
         console.log("==============");
 
         this.setState({
+          title: data.Nickname + "的照片 | KIZZ",
           uid: data.AccountId,
           user_page: "/user/" + data.AccountId,
           image: IMAGE_BASE_URL + data.Image,
@@ -48,6 +50,7 @@ var PicShare = React.createClass({
 
   getInitialState() {
     return {
+      title: "KIZZ",
       uid: "",
       user_page: "",
       image: "",
@@ -79,6 +82,7 @@ var PicShare = React.createClass({
     var like_list = this.state.likeList;
 
     return (
+      <DocumentTitle title={this.state.title || 'KIZZ'}>
       <div className="container">
         <div className="main">
           <div className="pic-share__head--simple">
@@ -128,6 +132,7 @@ var PicShare = React.createClass({
         </div>
         <Footer />
       </div>
+      </DocumentTitle>
     );
   }
 });

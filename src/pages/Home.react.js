@@ -3,7 +3,8 @@ var React = require('react'),
     api = require('../data/api'),
     Header = require('../components/Header.react'),
     Footer = require('../components/Footer.react'),
-    Link = require('react-router').Link;
+    Link = require('react-router').Link,
+    DocumentTitle = require('react-document-title');
 
 var IMAGE_BASE_URL = "http://7xkvcu.com1.z0.glb.clouddn.com/";
 
@@ -29,6 +30,7 @@ var Home = React.createClass({
         
         var userData = response.objects.data;
         this.setState({
+          title: userData.Nickname + "的个人主页 | KIZZ",
           avatar: userData.Avatar,
           nickname: userData.Nickname,
           liked: userData.LikeCount,
@@ -49,6 +51,7 @@ var Home = React.createClass({
 
   getInitialState() {
     return {
+      title: "KIZZ",
       avatar: "",
       nickname: "",
       info: "",
@@ -76,6 +79,7 @@ var Home = React.createClass({
         user_id = this.props.params.uid || 15;
 
     return (
+      <DocumentTitle title={this.state.title || 'KIZZ'}>
       <div block={this.$$block} className='container'>
         <Header />
         <div className="main">
@@ -106,34 +110,25 @@ var Home = React.createClass({
               <Link className="btn btn-primary" to="/">+ 关注</Link>
             </div>
           </div>
-          <ul className="personal-page__tab-tab">
-            <li><span data-for="tab-9-grid">img</span></li>
-            <li><span data-for="tab-tags">tag</span></li>
-          </ul>
-          <ul className="personal-page__tab-content">
-            <li id="tab-9-grid">
-            </li>
-            <li id="tab-tags">
-              <ul className="image-list">
-                {
-                  _.chain(pics)
-                    .uniq()
-                    .map(function(pic) {
-                      var pic_url = IMAGE_BASE_URL + pic.Image;
-                      return <li className="image-list__item pure-u-1-3">
-                              <Link className="image-list__link" to="picshare" params={{uid: user_id, pid: pic.PicId}}>
-                                <img className="image-list__image" src={pic_url} alt="image" />
-                              </Link>
-                            </li>;
-                    })
-                    .value()
-                }
-              </ul>
-            </li>
+          <ul className="image-list">
+            {
+              _.chain(pics)
+                .uniq()
+                .map(function(pic) {
+                  var pic_url = IMAGE_BASE_URL + pic.Image;
+                  return <li className="image-list__item pure-u-1-3">
+                          <Link className="image-list__link" to="picshare" params={{uid: user_id, pid: pic.PicId}}>
+                            <img className="image-list__image" src={pic_url} alt="image" />
+                          </Link>
+                        </li>;
+                })
+                .value()
+            }
           </ul>
         </div>
         <Footer />
       </div>
+      </DocumentTitle>
     );
   }
 });
