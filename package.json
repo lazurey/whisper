@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "description": "",
   "scripts": {
-    "start": "node_modules/gulp/bin/gulp server",
-    "build": "node_modules/gulp/bin/gulp build",
+    "start": "node_modules/gulp/bin/gulp.js server",
+    "build": "node_modules/gulp/bin/gulp.js build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
