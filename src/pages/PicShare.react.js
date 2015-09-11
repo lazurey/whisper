@@ -8,6 +8,28 @@ var React = require('react'),
 var IMAGE_BASE_URL = "http://7xkvcu.com1.z0.glb.clouddn.com/";
 
 var PicShare = React.createClass({
+  _load_picture: function(pid) {
+
+    api.pic_data({id: pid}).then(function(response) {
+      if (this.isMounted()) {
+        if (!response) return;
+        
+        var data = response.objects.data;
+
+        this.setState({
+          uid: data.AccountId,
+          user_page: "/user/" + data.AccountId,
+          image: IMAGE_BASE_URL + data.Image,
+          nickname: data.Nickname,
+          avatar: data.Avatar,
+          liked: data.LikeCount,
+          replies: data.ReplyCount,
+          likeList: data.LastLike
+        });
+      }
+    }.bind(this));
+  },
+
   statics: {
     routeName: 'PicShare'
   },
@@ -20,6 +42,8 @@ var PicShare = React.createClass({
 
   getInitialState() {
     return {
+      uid: "",
+      user_page: "",
       image: "",
       avatar: "",
       nickname: "",
@@ -29,40 +53,31 @@ var PicShare = React.createClass({
     }
   },
 
+  componentWillUpdate(nextProps, nextState) {
+    if (nextProps.params.pid !== this.props.params.pid) {
+      this._load_picture(nextProps.params.pid);
+    }
+  },
+
   componentDidMount() {
     var pid = this.props.params.pid;
-    console.log(pid);
-
-    api.pic_data({id: pid}).then(function(response) {
-      if (this.isMounted()) {
-        if (!response) return;
-        
-        var data = response.objects.data;
-        console.log(data);
-
-        this.setState({
-          image: IMAGE_BASE_URL + data.Image,
-          nickname: data.Nickname,
-          avatar: data.Avatar,
-          liked: data.LikeCount,
-          replies: data.ReplyCount,
-          likeList: data.LastLike
-        });
-      }
-    }.bind(this));
+    this._load_picture(pid);
   },
+
+
 
   render() {
     var like_list = this.state.likeList;
+
     return (
       <div className="container">
         <div className="main">
           <div className="pic-share__head--simple">
             <div className="pic-share__avatar">
-              <img src={this.state.avatar} alt="avatar" />
+              <Link to="person" params={{uid: this.state.uid}}><img src={this.state.avatar} alt="avatar" /></Link>
             </div>
             <div className="pic-share__info">
-              <h3>{this.state.nickname}</h3>
+              <h3><Link to="person" params={{uid: this.state.uid}}>{this.state.nickname}</Link></h3>
               <div className="pic-share__times"><span className="kizz"></span>被啵<span>{this.state.liked}</span>次</div>
             </div>
             <div className="pic-share__follow">
@@ -81,12 +96,9 @@ var PicShare = React.createClass({
                     _.chain(like_list)
                       .uniq()
                       .map(function(like_user) {
-                        var like_user_id = like_user.AccountId;
-                        var user_path = "/user/" + like_user_id,
-                            like_pic = like_user.Avatar;
                         return <li>
-                                <Link to={user_path}>
-                                  <img src={like_pic} alt="image" />
+                                <Link to="person" params={{uid: like_user.AccountId}}>
+                                  <img src={like_user.Avatar} alt="image" />
                                 </Link>
                               </li>;
                       })

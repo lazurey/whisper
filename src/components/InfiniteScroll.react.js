@@ -9,7 +9,6 @@ var InfiniteScroll = React.createClass({
   
   getInitialState() {
     return {
-      uid: "",
       piclist: []
     }
   },
@@ -18,25 +17,24 @@ var InfiniteScroll = React.createClass({
     console.log(this.props.api);
     var api_str = this.props.api || "hot_pics";
 
-    api.hot_pics({page: 1, size: 9}).then(function(response) {
+    if (api_str === "hot_pics") {
+      api.hot_pics({page: 1, size: 9}).then(function(response) {
+        if (this.isMounted()) {
+          if (!response) return;
+          var data = response.objects.data;
+          this.setState({
+            piclist: data
+          });
+        }
+      }.bind(this));
+    } else if (api_str === "personal") {
+      
+    }
 
-      if (this.isMounted()) {
-        if (!response) return;
-        
-        var data = response.objects.data;
-        console.log(data);
-
-        this.setState({
-          uid: data.AccountId,
-          piclist: data
-        });
-      }
-    }.bind(this));
 
   },
 
   render() {
-    var uid = this.state.AccountId
     var pics = this.state.piclist;
     return (
       <ul>
@@ -44,10 +42,9 @@ var InfiniteScroll = React.createClass({
           _.chain(pics)
             .uniq()
             .map(function(pic) {
-              var pic_share_path = "/share/" + uid + "/" + pic.PictureId;
               var pic_url = IMAGE_BASE_URL + pic.Image;
               return <li className="image-list__item pure-u-1-3">
-                      <Link className="image-list__link" to={pic_share_path}>
+                      <Link className="image-list__link" to="picshare" params={{uid: pic.AccountId, pid: pic.PictureId}}>
                         <img className="image-list__image" src={pic_url} alt="image" />
                       </Link>
                     </li>;

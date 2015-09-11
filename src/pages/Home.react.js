@@ -22,6 +22,25 @@ var Home = React.createClass({
     routeName: 'Home'
   },
 
+  _load_user: function (uid) {
+    api.user_data({id: uid, type: 2, page: 1, size: 9}).then(function(response) {
+      if (this.isMounted()) {
+        if (!response) return;
+        
+        var userData = response.objects.data;
+        this.setState({
+          avatar: userData.Avatar,
+          nickname: userData.Nickname,
+          liked: userData.LikeCount,
+          fans: userData.FansCount,
+          follow: userData.WishCount,
+          info: getGender(userData.Gender) + " " + (userData.ProvName || "") + (userData.AreaName || ""),
+          piclist: userData.PicList
+        });
+      }
+    }.bind(this));
+  },
+
   getDefaultProps() {
     return {
       routeName: 'Home'
@@ -40,28 +59,16 @@ var Home = React.createClass({
     }
   },
 
+  componentWillUpdate(nextProps, nextState) {
+    if (nextProps.params.uid !== this.props.params.uid) {
+      this._load_user(nextProps.params.uid);
+    }
+  },
+
   componentDidMount() {
     var uid = this.props.params.uid || 15;
-    console.log(uid);
-    api.user_data({id: uid, type: 2, page: 1, size: 9}).then(function(response) {
-
-      if (this.isMounted()) {
-        if (!response) return;
-        
-        var userData = response.objects.data;
-        console.log(userData);
-
-        this.setState({
-          avatar: userData.Avatar,
-          nickname: userData.Nickname,
-          liked: userData.LikeCount,
-          fans: userData.FansCount,
-          follow: userData.WishCount,
-          info: getGender(userData.Gender) + " " + (userData.ProvName || "") + (userData.AreaName || ""),
-          piclist: userData.PicList
-        });
-      }
-    }.bind(this));
+    this._load_user(uid);
+    
   },
 
   render() {
@@ -112,10 +119,9 @@ var Home = React.createClass({
                   _.chain(pics)
                     .uniq()
                     .map(function(pic) {
-                      var pic_share_path = "/share/" + user_id + "/" + pic.PicId;
                       var pic_url = IMAGE_BASE_URL + pic.Image;
                       return <li className="image-list__item pure-u-1-3">
-                              <Link className="image-list__link" to={pic_share_path}>
+                              <Link className="image-list__link" to="picshare" params={{uid: user_id, pid: pic.PicId}}>
                                 <img className="image-list__image" src={pic_url} alt="image" />
                               </Link>
                             </li>;
