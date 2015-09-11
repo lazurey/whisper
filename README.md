@@ -1,20 +1,16 @@
-# React Scaffolding
-
-This project is set up for my own react practise.
-
-I'm get rid of setting up this once and once again every time I try to start a new demo.
+# KIZZ Web App
 
 ## Tech Stack
 
-- nodejs
-- gulp
-- React/Browserify/Stylus
+- nodejs (v0.12)
+- gulp (v3.9)
+- React/Browserify/Stylus (v0.13)
 - And this supports ES6 and older.
 
 ## Set up
 
 - `npm install`
-- Keep `gulp dev` and `node index.js` running at two windows.
+- `gulp dev`
 
 Project is running at [http://localhost:3000](http://localhost:3000)
 
