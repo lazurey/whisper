@@ -30,7 +30,6 @@ var Home = React.createClass({
 
   getInitialState() {
     return {
-      uid: "",
       avatar: "",
       nickname: "",
       info: "",
@@ -43,6 +42,7 @@ var Home = React.createClass({
 
   componentDidMount() {
     var uid = this.props.params.uid || 15;
+    console.log(uid);
     api.user_data({id: uid, type: 2, page: 1, size: 9}).then(function(response) {
 
       if (this.isMounted()) {
@@ -52,7 +52,6 @@ var Home = React.createClass({
         console.log(userData);
 
         this.setState({
-          uid: userData.AccountId,
           avatar: userData.Avatar,
           nickname: userData.Nickname,
           liked: userData.LikeCount,
@@ -67,7 +66,7 @@ var Home = React.createClass({
 
   render() {
     var pics = this.state.piclist,
-        uid = this.state.uid;
+        user_id = this.props.params.uid || 15;
 
     return (
       <div block={this.$$block} className='container'>
@@ -113,7 +112,7 @@ var Home = React.createClass({
                   _.chain(pics)
                     .uniq()
                     .map(function(pic) {
-                      var pic_share_path = "/share/" + uid + "/" + pic.PicId;
+                      var pic_share_path = "/share/" + user_id + "/" + pic.PicId;
                       var pic_url = IMAGE_BASE_URL + pic.Image;
                       return <li className="image-list__item pure-u-1-3">
                               <Link className="image-list__link" to={pic_share_path}>

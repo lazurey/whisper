@@ -11,6 +11,17 @@ body {
   }
 }
 
+@media screen and (max-width: $screen-mid) {
+  body {
+    font-size: 12.8px;
+    font-size: 0.8rem;
+  }
+  
+  .btn {
+    padding: 0 $padding-small * 0.6;
+  }
+}
+
 * {
   letter-spacing: 0;
 }
@@ -36,7 +47,7 @@ p {
 
 
 .container {
-  min-width: 320px;
+  min-width: 280px;
   max-width: 640px;
   margin: 0 auto;
 }
@@ -62,4 +73,11 @@ p {
   display: block;
   width: 100%;
   text-align: center;
+}
+
+
+@media screen and (max-width: $screen-mid) {
+  .btn {
+    padding: 0 $padding-small * 0.8;
+  }
 }
