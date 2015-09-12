@@ -31,11 +31,11 @@ var WechatLayer = React.createClass({
     var show_style = (this.props.show && this.state.show) ? "wechat-layer" : "wechat-layer wechat-layer--hidden";
     return (
         <div className={show_style}>
-          <a href="javascript;" onClick={this._closeLayer} className="close">x</a>
           <div className="arrow">
             <img src="assets/images/arrow.png" />
           </div>
           <p>点击这里，选择Safari/浏览器打开下载app。</p>
+          <button onClick={this._closeLayer} className="btn btn-wide btn-light close">关闭</button>
         </div>
     );
   }
