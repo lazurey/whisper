@@ -29,8 +29,9 @@ var Home = React.createClass({
         if (!response) return;
         
         var userData = response.objects.data;
+        var this_title = userData.Nickname + "的个人主页 | KIZZ";
         this.setState({
-          title: userData.Nickname + "的个人主页 | KIZZ",
+          title: this_title,
           avatar: userData.Avatar,
           nickname: userData.Nickname,
           liked: userData.LikeCount,
@@ -39,6 +40,8 @@ var Home = React.createClass({
           info: getGender(userData.Gender) + " " + (userData.ProvName || "") + (userData.AreaName || ""),
           piclist: userData.PicList
         });
+
+        tools.update_wx_title(this_title);
       }
     }.bind(this));
   },

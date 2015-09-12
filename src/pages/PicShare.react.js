@@ -18,13 +18,14 @@ var PicShare = React.createClass({
         if (!response) return;
         
         var data = response.objects.data;
+        var this_title = data.Nickname + "的照片 | KIZZ";
         
         // console.log("==============");
         // console.log(data);
         // console.log("==============");
 
         this.setState({
-          title: data.Nickname + "的照片 | KIZZ",
+          title: this_title,
           uid: data.AccountId,
           user_page: "/user/" + data.AccountId,
           image: IMAGE_BASE_URL + data.Image,
@@ -35,6 +36,8 @@ var PicShare = React.createClass({
           comments: [data.LastReply1, data.LastReply2, data.LastReply3, data.LastReply4],
           likeList: data.LastLike
         });
+
+        tools.update_wx_title(this_title);
       }
     }.bind(this));
   },
