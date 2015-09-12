@@ -1,5 +1,4 @@
 var React = require('react'),
-    InfiniteList = require('react-infinite-scroll')(React),
     api = require('../data/api'),
     _ = require('lodash'),
     tools = require('../utils/tools'),
