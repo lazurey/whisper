@@ -79,54 +79,56 @@ var Home = React.createClass({
 
     return (
       <DocumentTitle title={this.state.title || 'KIZZ'}>
-      <div block={this.$$block} className='container'>
-        <Header />
-        <div className="main">
-          <div className="personal-page__header pure-g">
-            <div className="personal-page__header-avatar pure-u-6-24">
-              <img src={this.state.avatar} alt="avatar" />
-            </div>
-            <div className="pure-u-12-24">
-              <ul className="pure-g">
-                <li className="personal-page__header-data pure-u-1-3">
-                  <label>被啵</label>
-                  <span>{this.state.liked}</span>
-                </li>
-                <li className="personal-page__header-data pure-u-1-3">
-                  <label>关注</label>
-                  <span>{this.state.follow}</span>
-                </li>
-                <li className="personal-page__header-data pure-u-1-3">
-                  <label>粉丝</label>
-                  <span>{this.state.fans}</span>
-                </li>
-                <li className="personal-page__header-detail pure-u-3-3">
-                  <p>{this.state.info}</p>
-                </li>
+        <div>
+          <div className='container'>
+            <Header />
+            <div className="main">
+              <div className="personal-page__header pure-g">
+                <div className="personal-page__header-avatar pure-u-6-24">
+                  <img src={this.state.avatar} alt="avatar" />
+                </div>
+                <div className="pure-u-12-24">
+                  <ul className="pure-g">
+                    <li className="personal-page__header-data pure-u-1-3">
+                      <label>被啵</label>
+                      <span>{this.state.liked}</span>
+                    </li>
+                    <li className="personal-page__header-data pure-u-1-3">
+                      <label>关注</label>
+                      <span>{this.state.follow}</span>
+                    </li>
+                    <li className="personal-page__header-data pure-u-1-3">
+                      <label>粉丝</label>
+                      <span>{this.state.fans}</span>
+                    </li>
+                    <li className="personal-page__header-detail pure-u-3-3">
+                      <p>{this.state.info}</p>
+                    </li>
+                  </ul>
+                </div>
+                <div className="pure-u-6-24">
+                  <a target="_blank" className="btn btn-primary" href={tools.APP_URL}>+ 关注</a>
+                </div>
+              </div>
+              <ul className="image-list">
+                {
+                  _.chain(pics)
+                    .uniq()
+                    .map(function(pic) {
+                      var pic_url = tools.get_image_url(pic.Image, pic.Type);
+                      return <li className="image-list__item pure-u-1-3">
+                              <Link className="image-list__link" to="picshare" params={{uid: user_id, pid: pic.PicId}}>
+                                <img src={pic_url} alt="avatar" className="image-list__image" />
+                              </Link>
+                            </li>;
+                    })
+                    .value()
+                }
               </ul>
             </div>
-            <div className="pure-u-6-24">
-              <Link className="btn btn-primary" to="/">+ 关注</Link>
-            </div>
           </div>
-          <ul className="image-list">
-            {
-              _.chain(pics)
-                .uniq()
-                .map(function(pic) {
-                  var pic_url = tools.get_image_url(pic.Image, pic.Type);
-                  return <li className="image-list__item pure-u-1-3">
-                          <Link className="image-list__link" to="picshare" params={{uid: user_id, pid: pic.PicId}}>
-                            <img className="image-list__image" src={pic_url} alt="image" />
-                          </Link>
-                        </li>;
-                })
-                .value()
-            }
-          </ul>
+          <Footer />
         </div>
-        <Footer />
-      </div>
       </DocumentTitle>
     );
   }
