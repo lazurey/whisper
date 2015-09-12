@@ -33,7 +33,7 @@ var tools = {
     return (gender_arr[code] || "未知");
   },
 
-  APP_URL: WECHAT_RE + APP_ORIGINAL
+  APP_URL: APP_URL_HUMAN
 }
 
 module.exports = tools;
