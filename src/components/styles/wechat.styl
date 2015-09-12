@@ -1,0 +1,41 @@
+.wechat-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 10;
+  background: rgba(0, 0, 0, 0.6);
+  text-align: center;
+  color: $color-white;
+  
+  .arrow {
+    text-align: right;
+  }
+  
+  p {
+    font-size: 19.8px;
+    font-size: 1.2rem;
+    line-height: 1.8rem;
+    padding: 0 20px;
+  }
+  
+  &.wechat-layer--hidden {
+    display: none !important;
+  }
+  
+  .close {
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    border-radius: 100%;
+    border: 1px solid $color-white;
+    font-size: 12px;
+    display: block;
+    position: absolute;
+    top: 10px;
+    left: 10px;
+  }
+}

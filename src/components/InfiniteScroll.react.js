@@ -125,7 +125,7 @@ var InfiniteScroll = React.createClass({
 
               return <li className="image-list__item pure-u-1-3">
                       <Link className="image-list__link" to="picshare" params={{uid: userId, pid: picId}}>
-                        <img className="image-list__image" src={pic_url} alt="image" />
+                        <img className="image-list__image image" src={pic_url} alt="image" />
                       </Link>
                     </li>;
             })

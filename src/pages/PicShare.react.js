@@ -4,6 +4,7 @@ var React = require('react'),
     tools = require('../utils/tools'),
     Footer = require('../components/Footer.react'),
     Comment = require('../components/Comment.react'),
+    WechatLayer = require('../components/WechatLayer.react'),
     InfiniteScroll = require('../components/InfiniteScroll.react'),
     Link = require('react-router').Link,
     DocumentTitle = require('react-document-title');
@@ -11,6 +12,7 @@ var React = require('react'),
 var IMAGE_BASE_URL = "http://7xkvcu.com1.z0.glb.clouddn.com/";
 
 var PicShare = React.createClass({
+
   _load_picture: function(pid) {
 
     api.pic_data({id: pid}).then(function(response) {
@@ -19,10 +21,6 @@ var PicShare = React.createClass({
         
         var data = response.objects.data;
         var this_title = data.Nickname + "的照片 | KIZZ";
-        
-        // console.log("==============");
-        // console.log(data);
-        // console.log("==============");
 
         this.setState({
           title: this_title,
@@ -46,6 +44,12 @@ var PicShare = React.createClass({
     routeName: 'PicShare'
   },
 
+  _handleClick() {
+    this.setState({
+      showLayer: tools.is_wechat()
+    });
+  },
+
   getDefaultProps() {
     return {
       routeName: 'PicShare'
@@ -54,6 +58,7 @@ var PicShare = React.createClass({
 
   getInitialState() {
     return {
+      showLayer: false,
       title: "KIZZ",
       uid: "",
       user_page: "",
@@ -98,7 +103,7 @@ var PicShare = React.createClass({
                 <div className="pic-share__times"><span className="kizz"></span>被啵<span>{this.state.liked}</span>次</div>
               </div>
               <div className="pic-share__follow">
-                <a target="_blank" className="btn btn-primary" href={tools.APP_URL}>+ 关注</a>
+                <a target="_blank" className="btn btn-primary" onClick={this._handleClick} href={tools.APP_URL}>+ 关注</a>
               </div>
             </div>
             <div className="pic-share__pic">
@@ -132,6 +137,7 @@ var PicShare = React.createClass({
             <InfiniteScroll api="hot_pics" />
           </div>
           <Footer />
+          <WechatLayer />
         </div>
       </DocumentTitle>
     );

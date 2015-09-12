@@ -4,23 +4,20 @@ var React = require('react'),
     tools = require('../utils/tools'),
     Header = require('../components/Header.react'),
     Footer = require('../components/Footer.react'),
+    WechatLayer = require('../components/WechatLayer.react'),
     InfiniteScroll = require('../components/InfiniteScroll.react'),
     Link = require('react-router').Link,
     DocumentTitle = require('react-document-title');
 
-function getGender(code) {
-  if (code == 1) {
-    return "男";
-  } else if (code == 2) {
-    return "女";
-  } else {
-    return "未知";
-  }
-}
-
 var Home = React.createClass({
   statics: {
     routeName: 'Home'
+  },
+
+  _handleClick() {
+    this.setState({
+      showLayer: tools.is_wechat()
+    });
   },
 
   _load_user: function (uid) {
@@ -37,7 +34,7 @@ var Home = React.createClass({
           liked: userData.LikeCount,
           fans: userData.FansCount,
           follow: userData.WishCount,
-          info: getGender(userData.Gender) + " " + (userData.ProvName || "") + (userData.AreaName || ""),
+          info: tools.getGender(userData.Gender) + " " + (userData.ProvName || "") + (userData.AreaName || ""),
           piclist: userData.PicList
         });
 
@@ -54,6 +51,7 @@ var Home = React.createClass({
 
   getInitialState() {
     return {
+      showLayer: false,
       title: "KIZZ",
       avatar: "",
       nickname: "",
@@ -111,13 +109,14 @@ var Home = React.createClass({
                   </ul>
                 </div>
                 <div className="pure-u-6-24">
-                  <a target="_blank" className="btn btn-primary" href={tools.APP_URL}>+ 关注</a>
+                  <a target="_blank" onClick={this._handleClick} className="btn btn-primary" href={tools.APP_URL}>+ 关注</a>
                 </div>
               </div>
               <InfiniteScroll api="personal" uid={user_id} />
             </div>
           </div>
           <Footer />
+          <WechatLayer show={this.state.showLayer} />
         </div>
       </DocumentTitle>
     );
