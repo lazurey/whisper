@@ -31,7 +31,7 @@ var WechatLayer = React.createClass({
     var show_style = (this.props.show && this.state.show) ? "wechat-layer" : "wechat-layer wechat-layer--hidden";
     return (
         <div className={show_style}>
-          <span onClick={this._closeLayer} className="close">x</span>
+          <a href="#nogo" onClick={this._closeLayer} className="close">x</a>
           <div className="arrow">
             <img src="assets/images/arrow.png" />
           </div>
