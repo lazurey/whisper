@@ -28,6 +28,8 @@ var InfiniteScroll = React.createClass({
     var api_str = this.props.api || "hot_pics";
     var current_page = this.state.page;
 
+    // console.log("============== current page: ", current_page);
+
     if (api_str === "hot_pics") {
       api.hot_pics({page: current_page, size: PAGE_COUNT}).then(function(response) {
         if (this.isMounted()) {

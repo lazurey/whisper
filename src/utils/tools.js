@@ -11,16 +11,6 @@ var tools = {
     return IMAGE_BASE_URL + img + ((type === 2) ? "?vframe/png/offset/1" : "");
   },
   update_wx_title: function(title) {
-    // 这个太黑魔法了
-    // var $body = $('body')
-    // document.title = ‘title’
-    // // hack在微信等webview中无法修改document.title的情况
-    // var $iframe = $('<iframe src="/favicon.ico"></iframe>').on('load', function() {
-    //   setTimeout(function() {
-    //     $iframe.off('load').remove()
-    //   }, 0)
-    // }).appendTo($body)
-    console.log("updating");
     var body = document.getElementsByTagName('body')[0];
     document.title = title;
     var iframe = document.createElement("iframe");
