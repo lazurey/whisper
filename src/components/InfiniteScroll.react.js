@@ -98,13 +98,19 @@ var InfiniteScroll = React.createClass({
     this._get_pics();
   },
 
+  _show_heading() {
+    if (this.props.api === "hot_pics") {
+      return <div className="hot-pic__title"><h2>热门精选</h2></div>
+    }
+  },
+
   render() {
     var pics = this.state.piclist,
         api_str = this.props.api,
         prop_uid = this.props.uid;
     return (
       <div className="hot-pic">
-        <div className="hot-pic__title"><h2>热门精选</h2></div>
+        {this._show_heading()}
         <ul className="infinite-pic__parent">
           {
             _.chain(pics)

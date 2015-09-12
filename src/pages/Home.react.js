@@ -114,10 +114,10 @@ var Home = React.createClass({
               <InfiniteScroll api="personal" uid={user_id} />
             </div>
           </div>
-          <Footer />
         </div>
       </DocumentTitle>
     );
+          // <Footer />
   }
 });
 
