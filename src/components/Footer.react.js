@@ -14,7 +14,7 @@ var Footer = React.createClass({
               <p>最潮的晒娃神器</p>
             </div>
             <div className="app-promotion__link">
-              <a href="#" className="btn btn-primary app-promotion__button">立即打开</a>
+              <a target="_blank" href="https://itunes.apple.com/cn/app/kizz/id1031704971?l=zh&ls=1&mt=8" className="btn btn-primary app-promotion__button">立即打开</a>
             </div>
           </div>
         </div>
