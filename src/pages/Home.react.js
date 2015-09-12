@@ -4,6 +4,7 @@ var React = require('react'),
     tools = require('../utils/tools'),
     Header = require('../components/Header.react'),
     Footer = require('../components/Footer.react'),
+    InfiniteScroll = require('../components/InfiniteScroll.react'),
     Link = require('react-router').Link,
     DocumentTitle = require('react-document-title');
 
@@ -110,21 +111,7 @@ var Home = React.createClass({
                   <a target="_blank" className="btn btn-primary" href={tools.APP_URL}>+ 关注</a>
                 </div>
               </div>
-              <ul className="image-list">
-                {
-                  _.chain(pics)
-                    .uniq()
-                    .map(function(pic) {
-                      var pic_url = tools.get_image_url(pic.Image, pic.Type);
-                      return <li className="image-list__item pure-u-1-3">
-                              <Link className="image-list__link" to="picshare" params={{uid: user_id, pid: pic.PicId}}>
-                                <img src={pic_url} alt="avatar" className="image-list__image" />
-                              </Link>
-                            </li>;
-                    })
-                    .value()
-                }
-              </ul>
+              <InfiniteScroll api="personal" uid={user_id} />
             </div>
           </div>
           <Footer />

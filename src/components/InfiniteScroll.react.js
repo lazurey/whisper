@@ -4,6 +4,8 @@ var React = require('react'),
     tools = require('../utils/tools'),
     Link = require('react-router').Link;
 
+var PAGE_COUNT = 9;
+
 var InfiniteScroll = React.createClass({
   
   getInitialState() {
@@ -12,6 +14,55 @@ var InfiniteScroll = React.createClass({
       hasMore: true,
       isLoading: false,
       piclist: []
+    }
+  },
+
+  getDefaultProps() {
+    return {
+      api: "hot_pics",
+      uid: 0
+    }
+  },
+
+  _get_pics() {
+    var api_str = this.props.api || "hot_pics";
+    var current_page = this.state.page;
+
+    if (api_str === "hot_pics") {
+      api.hot_pics({page: current_page, size: PAGE_COUNT}).then(function(response) {
+        if (this.isMounted()) {
+          if (!response) return;
+          var currentPics = this.state.piclist;
+          var data = response.objects.data;
+          var hasmore = !(!data || data.length < PAGE_COUNT);
+          var new_piclist = _(currentPics).concat(data).value();
+          
+          this.setState({
+            page: current_page + 1,
+            piclist: new_piclist,
+            isLoading: false,
+            hasMore: hasmore
+          });
+        }
+      }.bind(this));
+    } else if (api_str === "personal") {
+      api.user_data({id: this.props.uid, type: 0, page: current_page, size: PAGE_COUNT}).then(function(response) {
+        if (this.isMounted()) {
+          if (!response) return;
+          
+          var currentPics = this.state.piclist;
+          var data = response.objects.data.PicList;
+          var hasmore = !(!data || data.length < PAGE_COUNT);
+          var new_piclist = _(currentPics).concat(data).value();
+
+          this.setState({
+            page: current_page + 1,
+            piclist: new_piclist,
+            isLoading: false,
+            hasMore: hasmore
+          });
+        }
+      }.bind(this));
     }
   },
 
@@ -29,7 +80,6 @@ var InfiniteScroll = React.createClass({
     if (down_enough && !this.state.isLoading) {
       this._load_more_items();
     }
-
   },
 
   componentWillUnmount() {
@@ -39,50 +89,19 @@ var InfiniteScroll = React.createClass({
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
     var api_str = this.props.api || "hot_pics";
-
-    if (api_str === "hot_pics") {
-      api.hot_pics({page: 1, size: 9}).then(function(response) {
-        if (this.isMounted()) {
-          if (!response) return;
-          var data = response.objects.data;
-          this.setState({
-            page: 2,
-            piclist: data,
-            isLoading: false
-          });
-        }
-      }.bind(this));
-    } else if (api_str === "personal") {
-
-    }
+    this._get_pics();
   },
 
   _load_more_items() {
     if (!this.state.hasMore) return;
-
     this.setState({ isLoading: true });
-    var current_page = this.state.page;
-    api.hot_pics({page: current_page, size: 9}).then(function(response) {
-      if (this.isMounted()) {
-        if (!response) return;
-
-        var currentPics = this.state.piclist;
-        var data = response.objects.data;
-        var hasmore = !(!data || data.length < 9);
-        var new_piclist = _(currentPics).concat(data).value();
-
-        this.setState({
-          page: current_page + 1,
-          piclist: new_piclist,
-          isLoading: false,
-          hasMore: hasmore
-        });
-      }
-    }.bind(this));
+    this._get_pics();
   },
 
   render() {
-    var pics = this.state.piclist;
+    var pics = this.state.piclist,
+        api_str = this.props.api,
+        prop_uid = this.props.uid;
     return (
       <div className="hot-pic">
         <div className="hot-pic__title"><h2>热门精选</h2></div>
@@ -92,8 +111,12 @@ var InfiniteScroll = React.createClass({
             .uniq()
             .map(function(pic) {
               var pic_url = tools.get_image_url(pic.Image, pic.Type);
+
+              var userId = (api_str === "hot_pics") ? pic.AccountId : prop_uid,
+                  picId = (api_str === "hot_pics") ? pic.PictureId : pic.PicId;
+
               return <li className="image-list__item pure-u-1-3">
-                      <Link className="image-list__link" to="picshare" params={{uid: pic.AccountId, pid: pic.PictureId}}>
+                      <Link className="image-list__link" to="picshare" params={{uid: userId, pid: picId}}>
                         <img className="image-list__image" src={pic_url} alt="image" />
                       </Link>
                     </li>;
