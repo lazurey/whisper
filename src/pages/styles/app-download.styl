@@ -1,3 +1,6 @@
+$btn-width = 259px;
+$btn-height = 69px;
+
 .app-download__container {
   max-width: 640px;
   margin: 0 auto;
@@ -19,7 +22,7 @@
   
   .app-download__partial--top {
     .app-download__btn-wrapper {
-      top: 270px;
+      top: 19%;
     }
   }
   
@@ -47,20 +50,33 @@
   
   .btn-app-download {
     background: url('../images/app-download.png') no-repeat transparent;
-    width: 259px;
-    height: 69px;
+    width: $btn-width;
+    height: $btn-height;
     display: block;
     margin: 0 auto;
+    background-size: 100%;
   }
 }
 @media screen and (max-width: $screen-max) { 
-  .app-download__container .app-download__partial--middle .baby-zoom {
-    width: 160px;
+  .app-download__container {
+    .app-download__partial--middle .baby-zoom {
+      width: 160px;
+    }
+    .btn-app-download {
+      width: $btn-width * 0.6;
+      height: $btn-height * 0.6;
+    }
   }
 }
 
 @media screen and (max-width: $screen-mid) { 
-  .app-download__container .app-download__partial--middle .baby-zoom {
-    width: 120px;
+  .app-download__container {
+    .app-download__partial--middle .baby-zoom {
+      width: 120px;
+    }
+    .btn-app-download {
+      width: $btn-width * 0.5;
+      height: $btn-height * 0.5;
+    }
   }
 }
