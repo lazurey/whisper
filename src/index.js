@@ -7,7 +7,8 @@ import React from 'react'
 
 import {
   Home,
-  PicShare
+  PicShare,
+  AppDownload
 } from './pages'
 
 import {
@@ -31,6 +32,8 @@ const rootRoutes = (
     <DefaultRoute handler={Home}/>
     <Route name="picshare" handler={PicShare} path="/share/:uid/:pid" />
     <Route name="person" handler={Home} path="/user/:uid" />
+    <Route name="appdownload" handler={AppDownload} path="/app-download" />
+
   </Route>
 );
 

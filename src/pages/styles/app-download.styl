@@ -1,0 +1,66 @@
+.app-download__container {
+  max-width: 640px;
+  margin: 0 auto;
+  position: relative;
+  min-width: 320px;
+  width: 100%;
+  .app-download__partial {
+    position: relative;
+    img {
+      max-width: 100%;
+    }
+    margin-top: -5px;
+  }
+  
+  .app-download__btn-wrapper {
+    position: absolute;
+    width: 100%;
+  }
+  
+  .app-download__partial--top {
+    .app-download__btn-wrapper {
+      top: 270px;
+    }
+  }
+  
+  .app-download__partial--bottom {
+    .app-download__btn-wrapper {
+      bottom: 40px;
+    }
+  }
+  
+  .app-download__partial--middle {
+    background: url('../images/gif-bg.png');
+    .app-download__padding {
+      padding: 5px 10%;
+    }
+    .baby-cry {
+      width: 100%;
+    }
+    .baby-zoom {
+      position: absolute;
+      right: 0;
+      top: 5px;
+      width: 220px;
+    }
+  }
+  
+  .btn-app-download {
+    background: url('../images/app-download.png') no-repeat transparent;
+    width: 259px;
+    height: 69px;
+    display: block;
+    margin: 0 auto;
+  }
+}
+@media screen and (max-width: $screen-max) { 
+  .app-download__container .app-download__partial--middle .baby-zoom {
+    width: 160px;
+  }
+}
+
+@media screen and (max-width: $screen-mid) { 
+  .app-download__container .app-download__partial--middle .baby-zoom {
+    width: 120px;
+  }
+}
