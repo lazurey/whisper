@@ -22,6 +22,12 @@ export default {
       'options': {
         'baseRegExp': /.+images/
       }
+    },
+    {
+      'src': [
+        `${gulp.config('base.src')}/index.hyperesources/**`
+      ],
+      'dest': `${gulp.config('base.dist')}/index.hyperesources`
     }
   ]
 }
