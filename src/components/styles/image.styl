@@ -17,11 +17,21 @@ img.image {
 }
 
 .btn-loading {
-  opacity: 0.6;
+  opacity: 0;
   padding: 10px 5px;
-  display: none !important;
+  position: fixed;
+  bottom: 80px;
+  width: 96%;
+  transition:  opacity 0.8s ease-in;
+  .btn {
+    background-color: $color-primary;
+    color: $color-text;
+    width: 100%;
+    display: inline-block;
+  }
   &.btn-loading__show {
-    display: block !important;
+    opacity: 0.9;
+    transition: opacity 0.1s ease-out;
   }
 }
 

@@ -138,7 +138,7 @@ var InfiniteScroll = React.createClass({
             .value()
           }
           <li className={this.state.loadClass}>
-            <button className="btn btn-primary btn-wide">加载中……</button>
+            <button className="btn">加载中……</button>
           </li>
         </ul>
       </div>
