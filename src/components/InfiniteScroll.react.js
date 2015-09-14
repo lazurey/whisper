@@ -13,6 +13,7 @@ var InfiniteScroll = React.createClass({
       page: 1,
       hasMore: true,
       isLoading: false,
+      loadClass: "btn-loading",
       piclist: []
     }
   },
@@ -41,6 +42,7 @@ var InfiniteScroll = React.createClass({
             page: current_page + 1,
             piclist: new_piclist,
             isLoading: false,
+            loadClass: "btn-loading",
             hasMore: hasmore
           });
         }
@@ -59,6 +61,7 @@ var InfiniteScroll = React.createClass({
             page: current_page + 1,
             piclist: new_piclist,
             isLoading: false,
+            loadClass: "btn-loading",
             hasMore: hasmore
           });
         }
@@ -93,7 +96,7 @@ var InfiniteScroll = React.createClass({
 
   _load_more_items() {
     if (!this.state.hasMore) return;
-    this.setState({ isLoading: true });
+    this.setState({ isLoading: true, loadClass: "btn-loading btn-loading__show"});
     this._get_pics();
   },
 
@@ -130,7 +133,7 @@ var InfiniteScroll = React.createClass({
             })
             .value()
           }
-          <li className="btn-loading">
+          <li className={this.state.loadClass}>
             <button className="btn btn-primary btn-wide">加载中……</button>
           </li>
         </ul>
