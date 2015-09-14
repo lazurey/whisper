@@ -50,6 +50,7 @@ var AppDownload = React.createClass({
               <a target="_blank" onClick={this._handleClick} className="btn-app-download" href={tools.APP_URL}>&nbsp;</a>
             </div>
           </div>
+          <WechatLayer show={this.state.showLayer} />
         </div>
       </DocumentTitle>
     );
