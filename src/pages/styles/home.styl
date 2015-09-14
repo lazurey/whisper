@@ -1,8 +1,5 @@
 .personal-page__header {
   padding: $padding-small;
-  @media screen and (max-width: $screen-mid) {
-    padding: $padding-small $padding-small * 0.5;
-  }
 }
 
 .personal-page__header-data {
@@ -21,7 +18,7 @@
   text-align: right;
 }
 
-@media screen and (max-width: $screen-max) {
+@media screen and (max-width: $screen-mid) {
   .personal-page__header-data {
     > * {
       font-size: 12.8px; /* fallback for IE8 */
@@ -39,8 +36,8 @@
   }
   @media screen and (max-width: $screen-mid) {
     img {
-      width: 60px;
-      height: 60px;
+      width: 50px;
+      height: 50px;
     }
   }
 }

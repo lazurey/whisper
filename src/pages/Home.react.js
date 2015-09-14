@@ -86,7 +86,7 @@ var Home = React.createClass({
             <Header />
             <div className="main">
               <div className="personal-page__header pure-g">
-                <div className="personal-page__header-avatar pure-u-6-24">
+                <div className="personal-page__header-avatar pure-u-5-24">
                   <img src={this.state.avatar} alt="avatar" />
                 </div>
                 <div className="pure-u-12-24">
@@ -105,11 +105,12 @@ var Home = React.createClass({
                     </li>
                     <li className="personal-page__header-detail pure-u-3-3">
                       <p>{this.state.info}</p>
+                      <p>个人简介</p>
                     </li>
                   </ul>
                 </div>
-                <div className="pure-u-6-24 person-page__follow">
-                  <a target="_blank" onClick={this._handleClick} className="btn btn-primary" href={tools.APP_URL}>+ 关注</a>
+                <div className="pure-u-7-24 person-page__follow">
+                  <a target="_blank" onClick={this._handleClick} className="btn btn-primary btn-follow" href={tools.APP_URL}>+ 关注</a>
                 </div>
               </div>
               <InfiniteScroll api="personal" uid={user_id} />

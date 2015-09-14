@@ -91,7 +91,11 @@ var InfiniteScroll = React.createClass({
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
     var api_str = this.props.api || "hot_pics";
-    this._get_pics();
+
+    if (!this.state.isLoading) {
+      this.setState({ isLoading: true, loadClass: "btn-loading btn-loading__show"});
+      this._get_pics();
+    }
   },
 
   _load_more_items() {
