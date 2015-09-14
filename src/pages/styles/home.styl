@@ -1,5 +1,8 @@
 .personal-page__header {
   padding: $padding-small;
+  @media screen and (max-width: $screen-mid) {
+    padding: $padding-small $padding-small * 0.5;
+  }
 }
 
 .personal-page__header-data {
@@ -12,6 +15,10 @@
     font-size: 1.2rem;
     text-align: center;
   }
+}
+
+.person-page__follow {
+  text-align: right;
 }
 
 @media screen and (max-width: $screen-max) {
@@ -39,6 +46,7 @@
 }
 
 .personal-page__header-detail {
+  padding-left: 10px;
   margin-top: $padding-small * 0.5;
 }
 

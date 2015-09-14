@@ -108,7 +108,7 @@ var Home = React.createClass({
                     </li>
                   </ul>
                 </div>
-                <div className="pure-u-6-24">
+                <div className="pure-u-6-24 person-page__follow">
                   <a target="_blank" onClick={this._handleClick} className="btn btn-primary" href={tools.APP_URL}>+ 关注</a>
                 </div>
               </div>

@@ -20,3 +20,27 @@ img.image {
   opacity: 0.6;
   padding: 10px 5px;
 }
+
+.image--gif {
+  position: relative;
+  &:before {
+    content: ' ';
+    background: url('../images/gif_icon.png') no-repeat top right;
+    position: absolute;
+    height: 80px;
+    width: 80px;
+    background-size: 80px 80px;
+    top: 0;
+    right: 2%;
+  }
+}
+
+@media screen and (max-width: $screen-max) {
+  .image--gif {
+    &:before {
+      height: 40px;
+      width: 40px;
+      background-size: 40px 40px;
+    }
+  }
+}
