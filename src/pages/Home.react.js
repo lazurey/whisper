@@ -81,10 +81,10 @@ var Home = React.createClass({
 
     return (
       <DocumentTitle title={this.state.title || 'KIZZ'}>
-        <div>
+        <div className="main">
           <div className='container'>
             <Header />
-            <div className="main">
+            <div>
               <div className="personal-page__header pure-g">
                 <div className="personal-page__header-avatar pure-u-5-24">
                   <img src={this.state.avatar} alt="avatar" />

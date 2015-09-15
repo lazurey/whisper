@@ -93,7 +93,7 @@ var PicShare = React.createClass({
 
     return (
       <DocumentTitle title={this.state.title || 'KIZZ'}>
-        <div>
+        <div className="main">
           <div className="container">
             <div className="pic-share__head--simple">
               <div className="pic-share__avatar">
