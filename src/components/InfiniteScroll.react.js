@@ -91,13 +91,23 @@ var InfiniteScroll = React.createClass({
     }
   },
 
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   return (nextProps.api !== this.props.api || nextProps.uid !== this.props.uid);
+  // },
+
+  // componentWillUpdate() {
+  //   if (!this.state.isLoading) {
+  //     this.setState({ isLoading: true, loadClass: "btn-loading btn-loading__show"});
+  //     this._get_pics();
+  //   }
+  // },
+
   componentWillUnmount() {
     window.removeEventListener('scroll', this.handleScroll);
   },
 
   componentDidMount() {
     window.addEventListener('scroll', this.handleScroll);
-    var api_str = this.props.api || "hot_pics";
 
     if (!this.state.isLoading) {
       this.setState({ isLoading: true, loadClass: "btn-loading btn-loading__show"});

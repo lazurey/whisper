@@ -83,8 +83,6 @@ var PicShare = React.createClass({
     this._load_picture(pid);
   },
 
-
-
   render() {
     var comment_list = this.state.comments;
 
@@ -104,7 +102,7 @@ var PicShare = React.createClass({
                 <div className="pic-share__times"><span className="kizz"></span>被啵<span>{this.state.liked}</span>次</div>
               </div>
               <div className="pic-share__follow">
-                <a target="_blank" className="btn btn-primary" onClick={this._handleClick} href={tools.APP_URL}>+ 关注</a>
+                <a target="_blank" className="btn btn-primary" onClick={this._handleClick} href={tools.APP_URL}><span className="follow__plus">+</span> 关注</a>
               </div>
             </div>
             <div className="pic-share__pic">
