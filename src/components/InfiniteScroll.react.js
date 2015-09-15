@@ -78,7 +78,9 @@ var InfiniteScroll = React.createClass({
         scroll_up = event.srcElement.body.scrollTop,
         screen_height = window.screen.height;
 
-    var down_enough = (page_height - (scroll_up + screen_height) < 200);
+    console.log(page_height, scroll_up, screen_height);
+    var down_enough = (page_height - (scroll_up + screen_height) < 300);
+    console.log(down_enough);
     if (down_enough && !this.state.isLoading) {
       this._load_more_items();
     }
