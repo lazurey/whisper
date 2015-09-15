@@ -89,6 +89,7 @@ var PicShare = React.createClass({
     var comment_list = this.state.comments;
 
     var like_list = this.state.likeList;
+    // <InfiniteScroll api="hot_pics" />
 
     return (
       <DocumentTitle title={this.state.title || 'KIZZ'}>
@@ -111,8 +112,8 @@ var PicShare = React.createClass({
             </div>
             <div className="pic-share__share">
               <div className="pure-g">
-                <div className="pic-share__kizz pure-u-6-24"><span className="kizz"></span><span className="kizz-text">啵</span></div>
-                <div className="pure-u-16-24">
+                <div className="pic-share__kizz pure-u-4-24"><span className="kizz"></span><span className="kizz-text">啵</span></div>
+                <div className="pure-u-18-24">
                   <ul className="share-user__list">
                     {
                       _.chain(like_list)
@@ -134,7 +135,7 @@ var PicShare = React.createClass({
               </div>
             </div>
             <Comment comments={comment_list} />
-            <InfiniteScroll api="hot_pics" />
+            
           </div>
           <Footer />
           <WechatLayer />
