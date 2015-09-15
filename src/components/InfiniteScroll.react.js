@@ -48,17 +48,24 @@ var InfiniteScroll = React.createClass({
         }
       }.bind(this));
     } else if (api_str === "personal") {
-      api.user_data({id: this.props.uid, type: 0, page: current_page, size: PAGE_COUNT}).then(function(response) {
+      var load_count = PAGE_COUNT;
+      var new_pager = current_page + 1;
+
+      if (current_page === 1) {
+        load_count = (window.screen.height > 500) ? PAGE_COUNT * 2 : PAGE_COUNT;
+        new_pager = (window.screen.height > 500) ? current_page + 2 : current_page + 1;
+      }
+      api.user_data({id: this.props.uid, type: 0, page: current_page, size: load_count}).then(function(response) {
         if (this.isMounted()) {
           if (!response) return;
           
           var currentPics = this.state.piclist;
           var data = response.objects.data.PicList;
-          var hasmore = !(!data || data.length < PAGE_COUNT);
+          var hasmore = !(!data || data.length < load_count);
           var new_piclist = _(currentPics).concat(data).value();
 
           this.setState({
-            page: current_page + 1,
+            page: new_pager,
             piclist: new_piclist,
             isLoading: false,
             loadClass: "btn-loading",
@@ -78,9 +85,7 @@ var InfiniteScroll = React.createClass({
         scroll_up = event.srcElement.body.scrollTop,
         screen_height = window.screen.height;
 
-    console.log(page_height, scroll_up, screen_height);
     var down_enough = (page_height - (scroll_up + screen_height) < 300);
-    console.log(down_enough);
     if (down_enough && !this.state.isLoading) {
       this._load_more_items();
     }
