@@ -29,11 +29,10 @@ const App = React.createClass({
 
 const rootRoutes = (
   <Route name='app' path="/" handler={App} alt='Home'>
-    <DefaultRoute handler={Home}/>
+    <DefaultRoute handler={AppDownload}/>
     <Route name="picshare" handler={PicShare} path="/share/:uid/:pid" />
     <Route name="person" handler={Home} path="/user/:uid" />
     <Route name="appdownload" handler={AppDownload} path="/app-download" />
-
   </Route>
 );
 
