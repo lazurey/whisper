@@ -17,6 +17,7 @@ gulp.config('tasks.build', {
   taskQueue: [
     'clean',
     'copy',
+    'imagemin',
     'stylus',
     'browserify'
   ]

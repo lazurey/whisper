@@ -44,8 +44,11 @@ var AppDownload = React.createClass({
             </div>
             <img className="baby-zoom" src="assets/images/baby-zoom.png" alt="baby cry" />
           </div>
-          <div className="app-download__partial app-download__partial--bottom">
+          <div className="app-download__partial">
             <img src="assets/images/app-bg-part-2.png" alt="KIZZ Download" />  
+          </div>
+          <div className="app-download__partial app-download__partial--bottom">
+            <img src="assets/images/app-bg-part-3.png" alt="KIZZ Download" />  
             <div className="app-download__btn-wrapper">
               <a target="_blank" onClick={this._handleClick} className="btn-app-download" href={tools.APP_URL}>&nbsp;</a>
             </div>
