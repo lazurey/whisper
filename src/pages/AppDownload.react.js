@@ -24,7 +24,7 @@ var AppDownload = React.createClass({
   getInitialState() {
     return {
       showLayer: false,
-      title: "KIZZ"
+      title: "粑粑麻麻，别让我输在起跑线上哦－－爱你的宝 发自KIZZ APP"
     }
   },
 
