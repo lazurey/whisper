@@ -82,6 +82,9 @@ var Home = React.createClass({
     return (
       <DocumentTitle title={this.state.title || 'KIZZ'}>
         <div className="main">
+          <div className="hidden">
+            <img src="assets/images/k-300.png" />
+          </div>
           <div className='container'>
             <Header />
             <div>
