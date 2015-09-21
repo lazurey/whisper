@@ -32,6 +32,9 @@ var AppDownload = React.createClass({
     return (
       <DocumentTitle title={this.state.title || 'KIZZ'}>
         <div className="app-download__container">
+          <div className="hidden">
+            <img src="assets/images/k-logo.png" width="300" height="300" />
+          </div>
           <div className="app-download__partial app-download__partial--top">
             <img src="assets/images/app-bg-part-1-header.png" alt="KIZZ Download" />
             <div className="app-download__btn-wrapper">
