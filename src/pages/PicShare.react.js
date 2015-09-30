@@ -102,7 +102,7 @@ var PicShare = React.createClass({
               </div>
               <div className="pic-share__info">
                 <h3><Link to="person" params={{uid: this.state.uid}}>{this.state.nickname}</Link></h3>
-                <div className="pic-share__times"><span className="kizz"></span>被啵<span>{this.state.liked}</span>次</div>
+                <div className="pic-share__times"><span className="kizz"></span>总数<span>{this.state.liked}</span>次</div>
               </div>
               <div className="pic-share__follow">
                 <a target="_blank" className="btn btn-primary" onClick={this._handleClick} href={tools.APP_URL}><span className="follow__plus">+</span> 关注</a>
