@@ -31,6 +31,7 @@ var PicShare = React.createClass({
           avatar: data.Avatar,
           liked: data.LikeCount,
           replies: data.ReplyCount,
+          content: data.Content,
           comments: [data.LastReply1, data.LastReply2, data.LastReply3, data.LastReply4],
           likeList: data.LastLike
         });
@@ -66,6 +67,7 @@ var PicShare = React.createClass({
       avatar: "",
       nickname: "",
       liked: "",
+      content: "",
       replies: 0,
       comments: [],
       likeList: []
@@ -102,7 +104,7 @@ var PicShare = React.createClass({
               </div>
               <div className="pic-share__info">
                 <h3><Link to="person" params={{uid: this.state.uid}}>{this.state.nickname}</Link></h3>
-                <div className="pic-share__times"><span className="kizz"></span>总数<span>{this.state.liked}</span>次</div>
+                <div className="pic-share__times"><span className="kizz kizz--small"></span>总数<span>{this.state.liked}</span>次</div>
               </div>
               <div className="pic-share__follow">
                 <a target="_blank" className="btn btn-primary" onClick={this._handleClick} href={tools.APP_URL}><span className="follow__plus">+</span> 关注</a>
@@ -112,6 +114,7 @@ var PicShare = React.createClass({
               <img src={this.state.image} alt="image" />
             </div>
             <div className="pic-share__share">
+              <p>{this.state.content}</p>
               <div className="pure-g">
                 <div className="pic-share__kizz pure-u-4-24"><span className="kizz"></span><span className="kizz-text">啵</span></div>
                 <div className="pure-u-18-24">
