@@ -4,6 +4,7 @@ var React = require('react'),
     tools = require('../utils/tools'),
     Link = require('react-router').Link,
     Comment = require('../components/Comment.react'),
+    Swipeable = require('react-swipeable'),
     DocumentTitle = require('react-document-title');
 
 var Timeline = React.createClass({
@@ -39,6 +40,8 @@ var Timeline = React.createClass({
 
   getInitialState() {
     return {
+      threshold: 60,
+      currentIndex: 1,
       title: "KIZZ",
       avatar: "",
       nickname: "",
@@ -58,6 +61,26 @@ var Timeline = React.createClass({
     
   },
 
+  swipingLeft(event, x) {
+    
+  },
+
+  handleSwipeAction(ev, x, y, isFlick) {
+    var oldIndex = this.state.currentIndex;
+    console.log("handle swipe action");
+    console.log(x, y, oldIndex);
+
+    if (x > 90) {
+      this.setState({
+        currentIndex: oldIndex + 1
+      });
+    } else if (x < -90 && oldIndex > 1) {
+      this.setState({
+        currentIndex: oldIndex - 1
+      });
+    }
+  },
+
   render() {
     var pics = this.state.piclist,
         user_id = this.props.params.uid || 15;
@@ -71,25 +94,78 @@ var Timeline = React.createClass({
               <h1>喵喵喵</h1>
             </div>
             <div>
-              <ul class="timeline-list">
-                <li className="timeline-item timeline-item--current">
-                  <div className="timeline-item__pic">
-                    <img src="/assets/images/example.jpg" />
-                  </div>
-                  <div>
-                    <ul className="bo-list">
-                      <li className="bo-item">
-                        <Link to="/">
-                          <img src="/assets/images/example.jpg" />
-                        </Link>  
-                      </li>
-                    </ul>
-                  </div>
-                  <div>
-                  Comment
-                  </div>
-                </li>
+              <ul className="timeline-list">
+                <Swipeable  onSwipingLeft={this.swipingLeft} 
+                            onSwiped={this.handleSwipeAction} 
+                            delta={this.state.threshold} >
+                  <li className="timeline-item timeline-item--left">
+                    <div className="timeline-item__pic">
+                      <img src="/assets/images/example.jpg" />
+                    </div>
+                    <div>
+                      <ul className="bo-list">
+                        <li className="bo-item">
+                          <Link to="/">
+                            <img src="/assets/images/example.jpg" />
+                          </Link>  
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                    Comment
+                    </div>
+                  </li>          
+                  <li className="timeline-item timeline-item--current">
+                    <div className="timeline-item__pic">
+                      <img src="/assets/images/example.jpg" />
+                    </div>
+                    <div>
+                      <ul className="bo-list">
+                        <li className="bo-item">
+                          <Link to="/">
+                            <img src="/assets/images/example.jpg" />
+                          </Link>  
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                      <p>Comment</p>
+                      <p>Comment</p>
+                      <p>Comment</p>
+                    </div>
+                  </li>
+                  <li className="timeline-item timeline-item--right">
+                    <div className="timeline-item__pic">
+                      <img src="/assets/images/example.jpg" />
+                    </div>
+                    <div>
+                      <ul className="bo-list">
+                        <li className="bo-item">
+                          <Link to="/">
+                            <img src="/assets/images/example.jpg" />
+                          </Link>  
+                        </li>
+                      </ul>
+                    </div>
+                    <div>
+                    Comment
+                    </div>
+                  </li>
+                </Swipeable>
               </ul>
+            </div>
+            <div>
+            <br/>
+              <br/>
+              <br/>
+              <br/>
+              <br/>
+              <img src="/assets/images/time-line.png" />
+              <br/>
+              <br/>
+              <br/>
+              <br/>
+              <br/>
             </div>
           </div>
         </div>

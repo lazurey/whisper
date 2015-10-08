@@ -2,6 +2,7 @@
   > .container {
     background: url('../images/timeline-bg.png') no-repeat top center #bcb196;
     background-size: 100%;
+    overflow: hidden;
   }
   .timeline-user {
     text-align: center;
@@ -20,11 +21,22 @@
   }
 }
 
+.timeline-list {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
 .timeline-item {
   background: $color-white;
   border-radius: 5px;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
   width: 190px;
+  display: none;
+  overflow: hidden;
+  
+  
   
   .timeline-item__pic {
     img {
@@ -32,9 +44,28 @@
       max-width: 100%;
     }
   }
+  
+  &.timeline-item--left {
+    display: block;
+    position: absolute;
+    top: 30px;
+    left: -120px;
+    opacity: 0.7;
+  }
+    
+  &.timeline-item--right {
+    display: block;
+    position: absolute;
+    top: 30px;
+    right: -120px;
+    opacity: 0.7;
+  }
 
   &.timeline-item--current {
-
+    display: block;
+    background: red;
+    margin: 0 auto;
+    top: 0;
   }
 }
 
