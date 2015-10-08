@@ -1,0 +1,50 @@
+.timeline {
+  > .container {
+    background: url('../images/timeline-bg.png') no-repeat top center #bcb196;
+    background-size: 100%;
+  }
+  .timeline-user {
+    text-align: center;
+    padding: 40px 0;
+    img {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      border: 2px solid $color-white;
+    }
+    h1 {
+      font-size: 12px;
+      color: $color-white;
+    }
+
+  }
+}
+
+.timeline-item {
+  background: $color-white;
+  border-radius: 5px;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
+  width: 190px;
+  
+  .timeline-item__pic {
+    img {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+
+  &.timeline-item--current {
+
+  }
+}
+
+.bo-list {
+  .bo-item {
+    display: inline-block;
+    img {
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+    }
+  }
+}
