@@ -28,12 +28,12 @@ const App = React.createClass({
   }
 });
 
-    // <Route name="timeline" handler={Timeline} path="/timeline/:uid" />
 const rootRoutes = (
   <Route name='app' path="/" handler={App} alt='Home'>
     <DefaultRoute handler={AppDownload}/>
     <Route name="picshare" handler={PicShare} path="/share/:uid/:pid" />
     <Route name="person" handler={Home} path="/user/:uid" />
+    <Route name="timeline" handler={Timeline} path="/timeline/:uid" />
     <Route name="appdownload" handler={AppDownload} path="/app-download" />
   </Route>
 );

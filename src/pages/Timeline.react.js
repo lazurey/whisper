@@ -4,6 +4,7 @@ var React = require('react'),
     tools = require('../utils/tools'),
     Link = require('react-router').Link,
     Comment = require('../components/Comment.react'),
+    Picture = require('../components/Picture.react'),
     Swipeable = require('react-swipeable'),
     DocumentTitle = require('react-document-title');
 
@@ -13,23 +14,35 @@ var Timeline = React.createClass({
   },
 
   _load_user: function (uid) {
-    // api.user_data({id: uid, type: 2, page: 1, size: 9}).then(function(response) {
-    //   if (this.isMounted()) {
-    //     if (!response) return;
+    api.user_data({id: uid, type: 2, page: 1, size: 9}).then(function(response) {
+      if (this.isMounted()) {
+        if (!response) return;
         
-    //     var userData = response.objects.data;
-    //     var this_title = userData.Nickname + "的个人主页 | 粑粑麻麻，别让我输在起跑线上哦--爱你的宝 发自KIZZ APP";
-    //     this.setState({
-    //       title: this_title,
-    //       avatar: userData.Avatar,
-    //       nickname: userData.Nickname,
-    //       piclist: userData.PicList
-    //     });
+        var userData = response.objects.data;
+        var this_title = userData.Nickname + "的个人主页 | 粑粑麻麻，别让我输在起跑线上哦--爱你的宝 发自KIZZ APP";
+        console.log(userData.PicList);
 
-    //     tools.update_wx_title(this_title);
-    //   }
-    // }.bind(this));
+        this.setState({
+          title: this_title,
+          avatar: userData.Avatar,
+          nickname: userData.Nickname,
+          piclist: userData.PicList
+        });
+
+      }
+    }.bind(this));
     console.log("loading user");
+  },
+
+  _load_pic_data: function(pid) {
+    api.pic_data({id: pid}).then(function(response) {
+      if (this.isMounted()) {
+        if (!response) return;
+        var data = response.objects.data;
+        console.log(data);
+        return data;
+      }
+    }.bind(this));
   },
 
   getDefaultProps() {
@@ -83,74 +96,35 @@ var Timeline = React.createClass({
 
   render() {
     var pics = this.state.piclist,
-        user_id = this.props.params.uid || 15;
+        user_id = this.props.params.uid || 15,
+        pic_index = 0,
+        cur_index = this.state.currentIndex;
+
 
     return (
       <DocumentTitle title={this.state.title || 'KIZZ'}>
         <div className="main timeline">
           <div className='container'>
             <div className="timeline-user">
-              <img src="/assets/images/example.jpg" />
-              <h1>喵喵喵</h1>
+              <img src={this.state.avatar} alt="avatar" />
+              <h1>{this.state.nickname}</h1>
             </div>
             <div>
               <ul className="timeline-list">
                 <Swipeable  onSwipingLeft={this.swipingLeft} 
                             onSwiped={this.handleSwipeAction} 
                             delta={this.state.threshold} >
-                  <li className="timeline-item timeline-item--left">
-                    <div className="timeline-item__pic">
-                      <img src="/assets/images/example.jpg" />
-                    </div>
-                    <div>
-                      <ul className="bo-list">
-                        <li className="bo-item">
-                          <Link to="/">
-                            <img src="/assets/images/example.jpg" />
-                          </Link>  
-                        </li>
-                      </ul>
-                    </div>
-                    <div>
-                    Comment
-                    </div>
-                  </li>          
-                  <li className="timeline-item timeline-item--current">
-                    <div className="timeline-item__pic">
-                      <img src="/assets/images/example.jpg" />
-                    </div>
-                    <div>
-                      <ul className="bo-list">
-                        <li className="bo-item">
-                          <Link to="/">
-                            <img src="/assets/images/example.jpg" />
-                          </Link>  
-                        </li>
-                      </ul>
-                    </div>
-                    <div>
-                      <p>Comment</p>
-                      <p>Comment</p>
-                      <p>Comment</p>
-                    </div>
-                  </li>
-                  <li className="timeline-item timeline-item--right">
-                    <div className="timeline-item__pic">
-                      <img src="/assets/images/example.jpg" />
-                    </div>
-                    <div>
-                      <ul className="bo-list">
-                        <li className="bo-item">
-                          <Link to="/">
-                            <img src="/assets/images/example.jpg" />
-                          </Link>  
-                        </li>
-                      </ul>
-                    </div>
-                    <div>
-                    Comment
-                    </div>
-                  </li>
+                  {
+                    _.chain(pics)
+                    .uniq()
+                    .map(function(pic) {
+                      var pid = pic.PicId;
+                      pic_index++;
+                      return <Picture pid={pid} currentIndex={cur_index} picIndex={pic_index} />;
+                    })
+                    .value()
+                  }
+                  
                 </Swipeable>
               </ul>
             </div>
