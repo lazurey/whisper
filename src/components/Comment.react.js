@@ -30,6 +30,30 @@ var Comment = React.createClass({
                   })
                   .value()
               }
+              <li className="pic-share__comment-item">
+                <Link to="person" params={{uid: 15}}>
+                  <p>
+                    <span className="comment__user">照照</span>：
+                    <span className="comment__content">你猜</span>
+                  </p>
+                </Link>
+              </li>
+              <li className="pic-share__comment-item">
+                <Link to="person" params={{uid: 15}}>
+                  <p>
+                    <span className="comment__user">照照</span>：
+                    <span className="comment__content">你猜</span>
+                  </p>
+                </Link>
+              </li>
+              <li className="pic-share__comment-item">
+                <Link to="person" params={{uid: 15}}>
+                  <p>
+                    <span className="comment__user">照照</span>：
+                    <span className="comment__content">你猜</span>
+                  </p>
+                </Link>
+              </li>
             </ul>
           </div>
   }

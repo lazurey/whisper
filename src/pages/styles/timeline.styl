@@ -25,6 +25,7 @@
   width: 100%;
   margin: 0;
   padding: 0;
+  height: 300px;
   position: relative;
 }
 
@@ -34,14 +35,21 @@
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.6);
   width: 190px;
   display: none;
-  overflow: hidden;
+  min-height: 250px;
   
-  
+  .timeline-date {
+    position: absolute;
+    top: 390px;
+    width: 190px;
+    text-align: center;
+    color: $color-white;
+  }
   
   .timeline-item__pic {
     img {
       width: 100%;
       max-width: 100%;
+      border-radius: 5px 5px 0 0;
     }
   }
   
@@ -51,6 +59,9 @@
     top: 30px;
     left: -120px;
     opacity: 0.7;
+    .timeline-date {
+      text-align: right;
+    }
   }
     
   &.timeline-item--right {
@@ -59,23 +70,25 @@
     top: 30px;
     right: -120px;
     opacity: 0.7;
+    .timeline-date {
+      text-align: left;
+    }
   }
 
   &.timeline-item--current {
     display: block;
-    background: red;
     margin: 0 auto;
-    top: 0;
+    opacity: 1;
+    .timeline-date {
+      text-align: center;
+      top: 420px;
+    }
   }
 }
 
-.bo-list {
-  .bo-item {
-    display: inline-block;
-    img {
-      width: 30px;
-      height: 30px;
-      border-radius: 50%;
-    }
+.timeline-line {
+  padding: 80px 0;
+  img {
+    max-width: 100%;
   }
 }

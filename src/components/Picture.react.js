@@ -15,7 +15,8 @@ var Likes = React.createClass({
   },
 
   render() {
-    var likes = this.props.likes || [];
+    var likes = _.take(this.props.likes, 3) || [];
+    var like_total = likes.length;
     return <div>
               <ul className="bo-list">
                 {
@@ -23,7 +24,6 @@ var Likes = React.createClass({
                     .uniq()
                     .map(function(like) {
                       if (!like) return;
-                      console.log(like);
                       return <li className="bo-item">
                               <Link to="/">
                                 <img src={like.Avatar} />
@@ -32,6 +32,7 @@ var Likes = React.createClass({
                     })
                     .value()
                 }
+                <li className="bo-item pic-share__count">{like_total}</li>
               </ul>
             </div>
   }
@@ -47,15 +48,14 @@ var Picture = React.createClass({
       type: "",
       comment_list: [],
       list_list: [],
+      create_date: "",
       like_total: 0
     }
   },
 
   getDefaultProps() {
     return {
-      pid: "1851",
-      currentIndex: 0,
-      picIndex: 0
+      pid: "1851"
     }
   },
 
@@ -68,12 +68,16 @@ var Picture = React.createClass({
       if (this.isMounted()) {
         if (!response) return;
         var data = response.objects.data;
-        // console.log(data);
+        var create_date = data.CreateDate;
+        create_date = create_date.match(/(.*)T/i);
+        create_date = (create_date && create_date.length > 0) ? create_date[1] : "";
+
         this.setState({
           image: data.Image,
           type: data.Type,
           comment_list: [data.LastReply1, data.LastReply2, data.LastReply3, data.LastReply4],
           like_list: data.LastLike,
+          create_date: create_date,
           like_total: data.LikeCount
         });
       }
@@ -82,28 +86,14 @@ var Picture = React.createClass({
 
   render() {
     var comment_list = this.state.comment_list,
-        like_list = this.state.like_list,
-        pic_url = tools.get_image_url(this.state.image, this.state.type);
-
-    var item_class = "timeline-item";
-
-    if (this.props.picIndex === this.props.currentIndex) {
-      item_class += " timeline-item--current";
-    } else if (this.props.picIndex + 1 === this.props.currentIndex) {
-      item_class += " timeline-item--left";
-    } else if (this.props.picIndex - 1 === this.props.currentIndex) {
-      item_class += " timeline-item--right";
-    }
+        like_list = this.state.like_list;
 
     return (
-      <li className={item_class}>
-        <div className="timeline-item__pic">
-          <img src={pic_url} alt="image" />
-        </div>
+      <div className="pic-info">
         <Likes likes={like_list} />
-        <div className="pic-share__count">{this.state.like_total}</div>
         <Comment comments={comment_list} />
-      </li>
+        <div className="timeline-date">{this.state.create_date}</div>
+      </div>
     );
   }
 });
