@@ -1,12 +1,21 @@
+html, body {
+  height: 100%;
+}
+
 .timeline {
+  &.main {
+    margin-bottom: 0;
+    height: 100%;
+  }
   > .container {
     background: url('../images/timeline-bg.png') no-repeat top center #bcb196;
     background-size: 100%;
+    height: 100%;
     overflow: hidden;
   }
   .timeline-user {
     text-align: center;
-    padding: 40px 0;
+    padding: 50px 0 20px 0;
     img {
       width: 55px;
       height: 55px;
@@ -16,6 +25,7 @@
     h1 {
       font-size: 12px;
       color: $color-white;
+      margin: 10px 0;
     }
 
   }
@@ -61,6 +71,7 @@
     opacity: 0.7;
     .timeline-date {
       text-align: right;
+      opacity: 0.5;
     }
   }
     
@@ -72,6 +83,7 @@
     opacity: 0.7;
     .timeline-date {
       text-align: left;
+      opacity: 0.5;
     }
   }
 
@@ -90,5 +102,37 @@
   padding: 80px 0;
   img {
     max-width: 100%;
+  }
+}
+
+@media screen and (max-width: 360px) {
+  .timeline {
+    .timeline-user {
+      padding: 20px 0 10px 0;
+    }
+  }
+  
+  .timeline-item {
+    &.timeline-item--right {
+      right: -150px;
+      .timeline-date {
+        top: 340px;
+      }
+    }
+    &.timeline-item--left {
+      left: -150px;
+      .timeline-date {
+        top: 340px;
+      }
+    }
+    &.timeline-item--current {
+      .timeline-date {
+        top: 370px;
+      }
+    }
+  }
+  
+  .timeline-line {
+    padding: 40px 0 40px 0;
   }
 }
