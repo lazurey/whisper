@@ -7,7 +7,7 @@ var React = require('react'),
     Swipeable = require('react-swipeable'),
     DocumentTitle = require('react-document-title');
 
-var SWIPE_AT_LEAST = 90;
+var SWIPE_AT_LEAST = 20;
 
 var Timeline = React.createClass({
   statics: {
@@ -31,7 +31,6 @@ var Timeline = React.createClass({
 
       }
     }.bind(this));
-    console.log("loading user");
   },
 
   getDefaultProps() {
@@ -43,6 +42,7 @@ var Timeline = React.createClass({
   getInitialState() {
     return {
       threshold: 60,
+      timeline_style: {right: 'auto'},
       currentIndex: 0,
       title: "粑粑麻麻，别让我输在起跑线上哦--爱你的宝 发自KIZZ APP",
       avatar: "",
@@ -62,22 +62,35 @@ var Timeline = React.createClass({
     this._load_user(uid);
   },
 
-  handleSwipeAction(ev, x, y, isFlick) {
-    console.log(x, y);
+  handleSwipeEnd(ev, x, y, isFlick) {
     var cur_index = this.state.currentIndex;
 
     if (x > SWIPE_AT_LEAST) {
-      console.log("swipe to left enough");
       this.setState({
-        currentIndex: cur_index + 1
+        currentIndex: cur_index + 1,
+        timeline_style: {right: 'auto'}
       });
       
     } else if (-x  > SWIPE_AT_LEAST && cur_index > 0) {
-      console.log("swipe to right enough");
       this.setState({
-        currentIndex: cur_index - 1
+        currentIndex: cur_index - 1,
+        timeline_style: {right: 'auto'}
       });
     }
+  },
+
+  handleSwipeLeft(ev, x, y) {
+    var new_position = (x == 0) ? "auto" : "" + x;
+    this.setState({
+      timeline_style: {right: new_position}
+    });
+  },
+
+  handleSwipeRight(ev, x, y) {
+    var new_position = (x == 0) ? "auto" : "" + (-x);
+    this.setState({
+      timeline_style: {right: new_position}
+    });
   },
 
   render() {
@@ -97,9 +110,11 @@ var Timeline = React.createClass({
               <h1>{this.state.nickname}</h1>
             </div>
             <div className="timeline-content">
-              <div className="timeline-list">
+              <div className="timeline-list" style={this.state.timeline_style}>
                 <Swipeable
-                  onSwiped={this.handleSwipeAction}
+                  onSwiped={this.handleSwipeEnd}
+                  onSwipingLeft={this.handleSwipeLeft}
+                  onSwipingRight={this.handleSwipeRight}
                   delta={swipe_at_least}>
                   {
                     _.chain(pics)
