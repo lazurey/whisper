@@ -105,6 +105,32 @@ html, body {
   }
 }
 
+@media screen and (max-width: 400px) and (min-width: 361px) {
+  .timeline-line {
+    padding: 60px 0;
+  }
+  
+  .timeline-item {
+    &.timeline-item--right {
+      right: -150px;
+      .timeline-date {
+        top: 370px;
+      }
+    }
+    &.timeline-item--left {
+      left: -150px;
+      .timeline-date {
+        top: 390px;
+      }
+    }
+    &.timeline-item--current {
+      .timeline-date {
+        top: 390px;
+      }
+    }
+  }
+}
+
 @media screen and (max-width: 360px) {
   .timeline {
     .timeline-user {
@@ -116,23 +142,23 @@ html, body {
     &.timeline-item--right {
       right: -150px;
       .timeline-date {
-        top: 340px;
+        top: 310px;
       }
     }
     &.timeline-item--left {
       left: -150px;
       .timeline-date {
-        top: 340px;
+        top: 310px;
       }
     }
     &.timeline-item--current {
       .timeline-date {
-        top: 370px;
+        top: 340px;
       }
     }
   }
   
   .timeline-line {
-    padding: 40px 0 40px 0;
+    padding: 10px 0;
   }
 }
