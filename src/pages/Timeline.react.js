@@ -20,20 +20,21 @@ var Timeline = React.createClass({
       if (this.isMounted()) {
         if (!response) return;
         
-        var userData = response.objects.data;
-        var this_title = userData.Nickname + "的时间线 | 粑粑麻麻，别让我输在起跑线上哦--爱你的宝 发自KIZZ APP";
-        var cur_piclist = this.state.piclist || [];
-
-        var cur_page = this.state.current_page;
+        var userData = response.objects.data,
+            this_title = userData.Nickname + "的时间线 | 粑粑麻麻，别让我输在起跑线上哦--爱你的宝 发自KIZZ APP",
+            cur_piclist = this.state.piclist || [],
+            cur_page = this.state.current_page;
 
         this.setState({
+          has_more: (userData.PicList.length === PAGE_COUNT),
           title: this_title,
+          loaded_count: (cur_page - 1) * PAGE_COUNT + userData.PicList.length,
           avatar: userData.Avatar,
           current_page: cur_page + 1,
           nickname: userData.Nickname,
           piclist: cur_piclist.concat(userData.PicList)
         });
-
+        console.log(this.state.loaded_count, this.state.has_more);
       }
     }.bind(this));
   },
@@ -49,6 +50,8 @@ var Timeline = React.createClass({
       threshold: 60,
       timeline_style: {right: 'auto'},
       currentIndex: 0,
+      loaded_count: 0,
+      has_more: true,
       current_page: 1,
       title: "粑粑麻麻，别让我输在起跑线上哦--爱你的宝 发自KIZZ APP",
       avatar: "",
@@ -83,8 +86,10 @@ var Timeline = React.createClass({
         timeline_style: {right: 'auto'}
       });
     }
-    if (this.state.currentIndex >= (this.state.current_page - 1) * PAGE_COUNT - 3) {
-      var cur_page = this.state.current_page;
+
+    console.log(this.state.currentIndex, this.state.loaded_count, this.state.has_more);
+    if ((this.state.currentIndex >= this.state.loaded_count - 3) && this.state.has_more) {
+      console.log("loading more");
       var uid = this.props.params.uid || 15;
       this._load_user(uid);
     }
@@ -111,6 +116,15 @@ var Timeline = React.createClass({
         cur_index = this.state.currentIndex,
         swipe_at_least = SWIPE_AT_LEAST;
 
+
+    // TO-DO: 三张一下特殊情况
+
+    if (!this.state.has_more && this.state.loaded_count < 3) {
+      // 1 ~ 2
+    } else if (this.state.loaded_count === 0) {
+      // 0
+    }
+
     var timeline = this;
     return (
       <DocumentTitle title={this.state.title || 'KIZZ'}>
@@ -127,6 +141,12 @@ var Timeline = React.createClass({
                   onSwipingLeft={this.handleSwipeLeft}
                   onSwipingRight={this.handleSwipeRight}
                   delta={swipe_at_least}>
+                  <div className="timeline-item timeline-item--placeholder">
+                    <div className="timeline-item__content">
+                      <img src="/assets/images/kizz-grey.png" />
+                      <p>你还没有内容哦，赶快来发布吧</p>
+                    </div>
+                  </div>
                   {
                     _.chain(pics)
                     .uniq()
