@@ -73,23 +73,22 @@ var Timeline = React.createClass({
 
   handleSwipeEnd(ev, x, y, isFlick) {
     var cur_index = this.state.currentIndex;
-
-    if (x > SWIPE_AT_LEAST) {
+    if (x > SWIPE_AT_LEAST && cur_index < this.state.loaded_count - 1) {
       this.setState({
-        currentIndex: cur_index + 1,
-        timeline_style: {right: 'auto'}
+        currentIndex: cur_index + 1
       });
       
-    } else if (-x  > SWIPE_AT_LEAST && cur_index > 0) {
+    } else if (-x  > SWIPE_AT_LEAST && cur_index > 1) {
       this.setState({
-        currentIndex: cur_index - 1,
-        timeline_style: {right: 'auto'}
+        currentIndex: cur_index - 1
       });
     }
 
-    console.log(this.state.currentIndex, this.state.loaded_count, this.state.has_more);
+    this.setState({
+      timeline_style: {right: 'auto'}
+    });
+
     if ((this.state.currentIndex >= this.state.loaded_count - 3) && this.state.has_more) {
-      console.log("loading more");
       var uid = this.props.params.uid || 15;
       this._load_user(uid);
     }
@@ -116,13 +115,11 @@ var Timeline = React.createClass({
         cur_index = this.state.currentIndex,
         swipe_at_least = SWIPE_AT_LEAST;
 
-
-    // TO-DO: 三张一下特殊情况
-
-    if (!this.state.has_more && this.state.loaded_count < 3) {
-      // 1 ~ 2
-    } else if (this.state.loaded_count === 0) {
-      // 0
+    var placeholder_image_class = "timeline-item timeline-item--placeholder";
+    if (!this.state.has_more && this.state.loaded_count == 2 && this.state.loaded_count == 1) {
+      placeholder_image_class += " timeline-item--right";
+    } else if (!this.state.has_more && this.state.loaded_count === 0) {
+      placeholder_image_class += " timeline-item--current";
     }
 
     var timeline = this;
@@ -141,7 +138,7 @@ var Timeline = React.createClass({
                   onSwipingLeft={this.handleSwipeLeft}
                   onSwipingRight={this.handleSwipeRight}
                   delta={swipe_at_least}>
-                  <div className="timeline-item timeline-item--placeholder">
+                  <div className={placeholder_image_class}>
                     <div className="timeline-item__content">
                       <img src="/assets/images/kizz-grey.png" />
                       <p>你还没有内容哦，赶快来发布吧</p>
