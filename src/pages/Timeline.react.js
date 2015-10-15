@@ -108,6 +108,10 @@ var Timeline = React.createClass({
     });
   },
 
+  handleClick() {
+    return 483;
+  },
+
   render() {
     var pics = this.state.piclist,
         user_id = this.props.params.uid || 15,
@@ -163,7 +167,7 @@ var Timeline = React.createClass({
                       pic_index++;
                       return (
                           <div className={item_class} onTouchStart={timeline.handleTouchStart}>
-                            <div className="timeline-item__pic">
+                            <div className="timeline-item__pic" onClick={timeline.handleClick}>
                               <img src={pic_url} />
                             </div>
                             <Picture pid={pid} />
