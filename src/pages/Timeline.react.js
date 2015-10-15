@@ -165,7 +165,7 @@ var Timeline = React.createClass({
                         item_class += " timeline-item--right";
                       }
 
-                      var app_url = "kizz://detail/" + pid;
+                      var app_url = "1031704971://detail/" + pid;
                       pic_index++;
                       return (
                           <div className={item_class} onTouchStart={timeline.handleTouchStart}>
