@@ -109,6 +109,7 @@ var Timeline = React.createClass({
   },
 
   handleClick() {
+    console.log("click");
     return 483;
   },
 
@@ -164,13 +165,16 @@ var Timeline = React.createClass({
                         item_class += " timeline-item--right";
                       }
 
+                      var app_url = "kizz://detail/" + pid;
                       pic_index++;
                       return (
                           <div className={item_class} onTouchStart={timeline.handleTouchStart}>
-                            <div className="timeline-item__pic" onClick={timeline.handleClick}>
-                              <img src={pic_url} />
-                            </div>
-                            <Picture pid={pid} />
+                            <a href={app_url} className="timeline-item__link">
+                              <div className="timeline-item__pic">
+                                <img src={pic_url} />
+                              </div>
+                              <Picture pid={pid} />
+                            </a>
                           </div>
                       );
                     })
