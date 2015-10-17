@@ -6,19 +6,55 @@
   
   .tag-icon--text {
     background: rgba(0, 0, 0, 0.9);
-    border-radius: 0 5px 5px 0;
-    padding-right: 8px;
+
     display: inline-block;
   }
   .tag-icon--container {
     position: relative;
     &:before {
-      background: url('../images/left_tag_arrow.png') no-repeat;
+      background-repeat: no-repeat;
       background-size: 12px 26px;
       width: 12px;
       height: 26px;
       content: ' ';
+    }
+  }
+  &.tag--left {
+    .tag-icon--text {
+      border-radius: 5px 0 0 5px;
+      padding-left: 8px;
+    }
+    .tag-icon--container:before {
+      background-image: url('../images/right_tag_arrow.png');
+      float: right;
+    }
+    .tag-icon {
+      right: 0;
+      .tag-icon--bg {
+        right: -16px;
+      }
+      .tag-icon--heart {
+        right: -15px;
+      }
+    }
+  }
+  &.tag--right {
+    .tag-icon--text {
+      border-radius: 0 5px 5px 0;
+      padding-right: 8px;
+    }
+    .tag-icon--container:before {
+      background-image: url('../images/left_tag_arrow.png');
       float: left;
+    }
+    .tag-icon {
+
+      .tag-icon--bg {
+        left: -16px;
+      }
+      .tag-icon--heart {
+        left: -15px;
+      }
     }
   }
 }
@@ -35,7 +71,6 @@
   position: absolute;
   .tag-icon--bg {
     position: absolute;
-    left: -16px;
     background: url('../images/brand_black_bg.png') no-repeat;
     background-size: 17px 17px;
     width: 17px;
@@ -45,7 +80,6 @@
   }
   .tag-icon--heart {
     position: absolute;
-    left: -15px;
     background: url('../images/tag_icon.png') no-repeat;
     background-size: 15px 15px;
     width: 15px;
