@@ -4,6 +4,7 @@ var React = require('react'),
     tools = require('../utils/tools'),
     Footer = require('../components/Footer.react'),
     Comment = require('../components/Comment.react'),
+    Tags = require('../components/Tags.react'),
     WechatLayer = require('../components/WechatLayer.react'),
     InfiniteScroll = require('../components/InfiniteScroll.react'),
     Link = require('react-router').Link,
@@ -32,6 +33,7 @@ var PicShare = React.createClass({
           liked: data.LikeCount,
           replies: data.ReplyCount,
           content: data.Content,
+          taglist: data.Tags,
           comments: [data.LastReply1, data.LastReply2, data.LastReply3, data.LastReply4],
           likeList: data.LastLike
         });
@@ -70,6 +72,7 @@ var PicShare = React.createClass({
       content: "",
       replies: 0,
       comments: [],
+      taglist: [],
       likeList: []
     }
   },
@@ -112,6 +115,7 @@ var PicShare = React.createClass({
             </div>
             <div className="pic-share__pic">
               <img src={this.state.image} alt="image" />
+              <Tags taglist={this.state.taglist} />
             </div>
             <div className="pic-share__share">
               <p>{this.state.content}</p>
