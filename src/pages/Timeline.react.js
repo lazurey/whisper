@@ -67,6 +67,8 @@ var Timeline = React.createClass({
   },
 
   componentDidMount() {
+    document.body.style.height = "100%";
+    document.getElementsByTagName('html')[0].style.height = "100%";
     var uid = this.props.params.uid || 15;
     this._load_user(uid);
   },
