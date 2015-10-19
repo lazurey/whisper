@@ -80,7 +80,7 @@ var Timeline = React.createClass({
         currentIndex: cur_index + 1
       });
       
-    } else if (-x  > SWIPE_AT_LEAST && cur_index > 1) {
+    } else if (-x  > SWIPE_AT_LEAST && cur_index > 0) {
       this.setState({
         currentIndex: cur_index - 1
       });
