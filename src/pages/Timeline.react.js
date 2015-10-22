@@ -15,6 +15,15 @@ var Timeline = React.createClass({
     routeName: 'Timeline'
   },
 
+  connectWebViewJavascriptBridge: function (callback) {
+    console.log("connecting web view js bridge");
+    if (window.WebViewJavascriptBridge) {
+      callback(WebViewJavascriptBridge);
+    } else {
+      document.addEventListener('WebViewJavascriptBridgeReady', function() {callback(WebViewJavascriptBridge);}, false);
+    }
+  },
+
   _load_user: function (uid) {
     api.user_data({id: uid, type: 2, page: this.state.current_page, size: PAGE_COUNT}).then(function(response) {
       if (this.isMounted()) {
@@ -71,6 +80,25 @@ var Timeline = React.createClass({
     document.getElementsByTagName('html')[0].style.height = "100%";
     var uid = this.props.params.uid || 15;
     this._load_user(uid);
+
+    this.connectWebViewJavascriptBridge(function(bridge) {
+      bridge.init(function(message, responseCallback) {
+          log('JS got a message', message)
+          var data = { 'Javascript Responds':'Wee!' }
+          log('JS responding with', data)
+          responseCallback(data)
+      });
+    });
+  },
+
+  handleClick(pid) {
+    console.log("click ", pid);
+    this.connectWebViewJavascriptBridge(function(bridge) {
+      bridge.send({"pid": pid});
+      bridge.callHandler('openAppPicView', {'pid': pid}, function(response) {
+        console.log("call handler done");
+      });
+    });
   },
 
   handleSwipeEnd(ev, x, y, isFlick) {
@@ -108,12 +136,6 @@ var Timeline = React.createClass({
     this.setState({
       timeline_style: {right: new_position}
     });
-  },
-
-  handleClick(pid) {
-    console.log("click ", pid);
-    if ((typeof openAppPicView) !== "undefined") openAppPicView(pid);
-    return pid || 483;
   },
 
   render() {
