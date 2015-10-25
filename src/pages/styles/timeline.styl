@@ -127,16 +127,104 @@
   }
 }
 
+@keyframes timelinedot {
+  from {
+    opacity: 0.6;
+    width: 6px;
+    height: 6px;
+  }
+  30% {
+    opacity: 0.8;
+    width: 8px;
+    height: 8px;
+    border-with: 4px;
+    box-shadow: 0px 0 6px 2px #ccc;
+  }
+  
+  80% {
+    opacity: 0.7;
+    width: 6px;
+    height: 6px;
+  }
+  from {
+    opacity: 0.6;
+    width: 6px;
+    height: 6px;
+  }
+}
+
+@keyframes timelinemiddle {
+  from {
+    opacity: 0.8;
+    width: 8px;
+    height: 8px;
+  }
+  30% {
+    opacity: 1;
+    width: 10px;
+    height: 10px;
+    box-shadow: 0px 0 12px 3px #fff;
+  }
+  
+  80% {
+    opacity: 0.9;
+    width: 8px;
+    height: 8px;
+  }
+  from {
+    opacity: 0.8;
+    width: 8px;
+    height: 8px;
+  }
+}
+
 .timeline-line {
-  padding: 80px 0;
+  margin: 80px 0;
+  position: relative;
   img {
     max-width: 100%;
+  }
+  .timeline-dot {
+    position: absolute;
+    border-radius: 50%;
+  }
+  .timeline-dot--left {
+    left: 23px;
+    top: 46%;
+  }
+  .timeline-dot--right {
+    right: 27px;
+    top: 2px;
+  }
+  .timeline-dot--current {
+    box-shadow: 0 0 10px 3px #fff;
+    background-color: #fff
+    width: 8px;
+    height: 8px;
+    left: 50%;
+    top: 4px;
+    animation: timelinemiddle 2s infinite;
+  }
+  .timeline-dot--grey {
+    border: 2.5px solid #cccccc;
+    background-color: transparent;
+    animation: timelinedot 2s infinite;
+    width: 6px;
+    height: 6px;
+    display: block;
   }
 }
 
 @media screen and (max-width: 400px) and (min-width: 361px) {
   .timeline-line {
-    padding: 60px 0;
+    margin: 60px 0;
+    .timeline-dot--left {
+      left: 20px;
+      top: 9px;
+    }
+    .timeline-dot--right {
+      right: 24px;
+    }
   }
   
   .timeline-item {
@@ -149,7 +237,7 @@
     &.timeline-item--left {
       left: -150px;
       .timeline-date {
-        top: 390px;
+        top: 370px;
       }
     }
     &.timeline-item--current {
@@ -188,6 +276,14 @@
   }
   
   .timeline-line {
-    padding: 10px 0;
+    margin: 10px 0;
+    .timeline-dot--left {
+      left: 17px;
+      top: 6px;
+    }
+    .timeline-dot--right {
+      right: 20px;
+      top: 1px;
+    }
   }
 }

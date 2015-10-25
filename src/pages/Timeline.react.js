@@ -206,6 +206,9 @@ var Timeline = React.createClass({
               </div>
               <div className="timeline-line">
                 <img src="/assets/images/time-line.png" />
+                <div className="timeline-dot timeline-dot--left timeline-dot--grey"></div>
+                <div className="timeline-dot timeline-dot--current"></div>
+                <div className="timeline-dot timeline-dot--right timeline-dot--grey"></div>
               </div>
             </div>
           </div>
