@@ -43,7 +43,7 @@ var Timeline = React.createClass({
           nickname: userData.Nickname,
           piclist: cur_piclist.concat(userData.PicList)
         });
-        console.log(this.state.loaded_count, this.state.has_more);
+        // console.log(this.state.loaded_count, this.state.has_more);
       }
     }.bind(this));
   },
@@ -124,18 +124,22 @@ var Timeline = React.createClass({
     }
   },
 
-  handleSwipeLeft(ev, x, y) {
-    var new_position = (x == 0) ? "auto" : "" + x;
+  _processPosition(direction, x) {
+    // var screen_width = screen.width;
+    var new_x_position = (x == 0) ? "auto" : "" + (direction === "left") ? x : (-x);
+    // var new_y_position = (2 * x / screen_width) * 30;
+    // console.log(new_y_position);
     this.setState({
-      timeline_style: {right: new_position}
+      timeline_style: {right: new_x_position}
     });
   },
 
+  handleSwipeLeft(ev, x, y) {
+    this._processPosition("left", x);
+  },
+
   handleSwipeRight(ev, x, y) {
-    var new_position = (x == 0) ? "auto" : "" + (-x);
-    this.setState({
-      timeline_style: {right: new_position}
-    });
+    this._processPosition("right", x);
   },
 
   render() {
@@ -182,12 +186,24 @@ var Timeline = React.createClass({
                           pic_url = tools.get_image_url(pic.Image, pic.Type);
                       var item_class = "timeline-item";
 
-                      if (pic_index === cur_index) {
-                        item_class += " timeline-item--current";
-                      } else if (pic_index + 1 === cur_index) {
-                        item_class += " timeline-item--left";
-                      } else if (pic_index - 1 === cur_index) {
-                        item_class += " timeline-item--right";
+                      switch (pic_index) {
+                        case (cur_index - 2):
+                          item_class += " timeline-item--leftest";
+                          break;
+                        case (cur_index - 1):
+                          item_class += " timeline-item--left";
+                          break;
+                        case (cur_index):
+                          item_class += " timeline-item--current";
+                          break;
+                        case (cur_index + 1):
+                          item_class += " timeline-item--right";
+                          break;
+                        case (cur_index + 2):
+                          item_class += " timeline-item--rightest";
+                          break;
+                        default:
+                          break;
                       }
 
                       pic_index++;
