@@ -129,9 +129,16 @@ var Timeline = React.createClass({
     var new_x_position = (x == 0) ? "auto" : "" + (direction === "left") ? x : (-x);
     // var new_y_position = (2 * x / screen_width) * 30;
     // console.log(new_y_position);
-    this.setState({
-      timeline_style: {right: new_x_position}
-    });
+
+    if (direction === "left") {
+      this.setState({
+        timeline_style: {right: new_x_position}
+      });
+    } else {
+      this.setState({
+        timeline_style: {left: new_x_position}
+      });
+    }
   },
 
   handleSwipeLeft(ev, x, y) {
