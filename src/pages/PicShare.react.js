@@ -21,7 +21,7 @@ var PicShare = React.createClass({
         if (!response) return;
         
         var data = response.objects.data;
-        var this_title = data.Nickname + "的照片 | 粑粑麻麻，别让我输在起跑线上哦--爱你的宝 发自KIZZ APP";
+        var this_title = data.Nickname + "的照片 | 粑粑麻麻你们别输在起跑线上哟 发自KIZZ APP";
 
         this.setState({
           title: this_title,
@@ -62,7 +62,7 @@ var PicShare = React.createClass({
   getInitialState() {
     return {
       showLayer: false,
-      title: "粑粑麻麻，别让我输在起跑线上哦－－爱你的宝 发自KIZZ APP",
+      title: "粑粑麻麻你们别输在起跑线上哟 发自KIZZ APP",
       uid: "",
       user_page: "",
       image: "",

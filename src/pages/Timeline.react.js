@@ -30,7 +30,7 @@ var Timeline = React.createClass({
         if (!response) return;
         
         var userData = response.objects.data,
-            this_title = userData.Nickname + "的时间线 | 粑粑麻麻，别让我输在起跑线上哦--爱你的宝 发自KIZZ APP",
+            this_title = userData.Nickname + "的时间线 | 粑粑麻麻你们别输在起跑线上哟 发自KIZZ APP",
             cur_piclist = this.state.piclist || [],
             cur_page = this.state.current_page;
 
