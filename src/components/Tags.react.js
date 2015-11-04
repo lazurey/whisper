@@ -24,8 +24,9 @@ var Tags = React.createClass({
   _getPosition(x, y) {
     if (this._checkDate(this.props.date)) {
       // use new position
-      x = screen.width / x;
-      y = screen.width / y;
+      var baseWidth = (screen.width > 640) ? 640 : screen.width;
+      x = baseWidth / x;
+      y = baseWidth / y;
     }
     return {"left": x, "top": y};
   },
