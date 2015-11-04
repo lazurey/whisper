@@ -21,6 +21,7 @@ var PicShare = React.createClass({
         if (!response) return;
         
         var data = response.objects.data;
+        // console.log(data);
         var this_title = data.Nickname + "的照片 | " + tools.APP_SLOGAN;
 
         this.setState({
@@ -30,6 +31,7 @@ var PicShare = React.createClass({
           image: IMAGE_BASE_URL + data.Image,
           nickname: data.Nickname,
           avatar: data.Avatar,
+          date: data.CreateDate,
           liked: data.LikeCount,
           replies: data.ReplyCount,
           content: data.Content,
@@ -115,7 +117,7 @@ var PicShare = React.createClass({
             </div>
             <div className="pic-share__pic">
               <img src={this.state.image} alt="image" />
-              <Tags taglist={this.state.taglist} />
+              <Tags taglist={this.state.taglist} date={this.state.date} />
             </div>
             <div className="pic-share__share">
               <p>{this.state.content}</p>

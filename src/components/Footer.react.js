@@ -27,7 +27,7 @@ var Footer = React.createClass({
               </div>
               <div className="app-promotion__description">
                 <p>KIZZ</p>
-                <p>史上最潮晒娃神器</p>
+                <p>史上zui潮晒娃神器</p>
               </div>
               <div className="app-promotion__link">
                 <a target="_blank" href={tools.APP_URL} onClick={this._handleClick} className="btn btn-primary app-promotion__button">立即下载</a>
