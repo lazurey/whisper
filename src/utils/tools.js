@@ -33,7 +33,9 @@ var tools = {
     return (gender_arr[code] || "未知");
   },
 
-  APP_URL: APP_URL_HUMAN
+  APP_URL: APP_URL_HUMAN,
+
+  APP_SLOGAN: "粑粑麻麻你们别输在起跑线上哟 发自KIZZ APP"
 }
 
 module.exports = tools;

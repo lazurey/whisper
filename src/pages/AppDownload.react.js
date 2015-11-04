@@ -24,7 +24,7 @@ var AppDownload = React.createClass({
   getInitialState() {
     return {
       showLayer: false,
-      title: "粑粑麻麻你们别输在起跑线上哟 发自KIZZ APP"
+      title: tools.APP_SLOGAN
     }
   },
 

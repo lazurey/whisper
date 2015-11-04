@@ -30,7 +30,7 @@ var Timeline = React.createClass({
         if (!response) return;
         
         var userData = response.objects.data,
-            this_title = userData.Nickname + "的时间线 | 粑粑麻麻你们别输在起跑线上哟 发自KIZZ APP",
+            this_title = userData.Nickname + "的时间线 | " + tools.APP_SLOGAN,
             cur_piclist = this.state.piclist || [],
             cur_page = this.state.current_page;
 
@@ -62,7 +62,7 @@ var Timeline = React.createClass({
       loaded_count: 0,
       has_more: true,
       current_page: 1,
-      title: "粑粑麻麻，别让我输在起跑线上哦--爱你的宝 发自KIZZ APP",
+      title: tools.APP_SLOGAN,
       avatar: "",
       nickname: "",
       piclist: []
@@ -92,7 +92,6 @@ var Timeline = React.createClass({
   },
 
   handleClick(pid) {
-    console.log("click ", pid);
     this.connectWebViewJavascriptBridge(function(bridge) {
       bridge.send({"pid": pid});
       bridge.callHandler('openAppPicView', {'pid': pid}, function(response) {
@@ -125,10 +124,7 @@ var Timeline = React.createClass({
   },
 
   _processPosition(direction, x) {
-    // var screen_width = screen.width;
     var new_x_position = (x == 0) ? "auto" : "" + (direction === "left") ? x : (-x);
-    // var new_y_position = (2 * x / screen_width) * 30;
-    // console.log(new_y_position);
 
     if (direction === "left") {
       this.setState({

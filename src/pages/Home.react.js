@@ -26,7 +26,7 @@ var Home = React.createClass({
         if (!response) return;
         
         var userData = response.objects.data;
-        var this_title = userData.Nickname + "的个人主页 | 粑粑麻麻你们别输在起跑线上哟 发自KIZZ APP";
+        var this_title = userData.Nickname + "的个人主页 | " + tools.APP_SLOGAN;
         this.setState({
           title: this_title,
           avatar: userData.Avatar,
