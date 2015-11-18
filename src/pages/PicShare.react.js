@@ -1,28 +1,31 @@
-var React = require('react'),
-    _ = require('lodash'),
-    api = require('../data/api'),
-    tools = require('../utils/tools'),
-    Footer = require('../components/Footer.react'),
-    Comment = require('../components/Comment.react'),
-    Tags = require('../components/Tags.react'),
-    WechatLayer = require('../components/WechatLayer.react'),
-    InfiniteScroll = require('../components/InfiniteScroll.react'),
-    Link = require('react-router').Link,
-    DocumentTitle = require('react-document-title');
+import React, { Component } from 'react'
+import _ from 'lodash'
+import { Link } from 'react-router'
+import DocumentTitle from 'react-document-title'
 
-var IMAGE_BASE_URL = "http://7xkvcu.com1.z0.glb.clouddn.com/";
+import tools from '../utils/tools'
+import api from '../data/api'
+import {
+  WechatLayer,
+  Footer,
+  Comment,
+  Tags,
+  InfiniteScroll
+} from '../components'
 
-var PicShare = React.createClass({
+const IMAGE_BASE_URL = "http://7xkvcu.com1.z0.glb.clouddn.com/";
+
+const PicShare = React.createClass({
 
   _load_picture: function(pid) {
 
-    api.pic_data({id: pid}).then(function(response) {
+    api.pic_data({id: pid}).then(response => {
       if (this.isMounted()) {
         if (!response) return;
         
-        var data = response.objects.data;
+        let data = response.objects.data;
         // console.log(data);
-        var this_title = data.Nickname + "的照片 | " + tools.APP_SLOGAN;
+        let this_title = data.Nickname + "的照片 | " + tools.APP_SLOGAN;
 
         this.setState({
           title: this_title,
@@ -86,16 +89,13 @@ var PicShare = React.createClass({
   },
 
   componentWillMount() {
-    var pid = this.props.params.pid;
+    let pid = this.props.params.pid;
     this._load_picture(pid);
   },
 
   render() {
-    var comment_list = this.state.comments;
-
-    var like_list = this.state.likeList;
-    // <InfiniteScroll api="hot_pics" />
-
+    let comment_list = this.state.comments;
+    let like_list = this.state.likeList;
     return (
       <DocumentTitle title={this.state.title || 'KIZZ'}>
         <div className="main">
@@ -128,7 +128,7 @@ var PicShare = React.createClass({
                     {
                       _.chain(like_list)
                         .uniq()
-                        .map(function(like_user) {
+                        .map(like_user => {
                           return <li>
                                   <Link to="person" params={{uid: like_user.AccountId}}>
                                     <img src={like_user.Avatar} alt="image" />

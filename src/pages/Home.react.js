@@ -1,15 +1,18 @@
-var React = require('react'),
-    _ = require('lodash'),
-    api = require('../data/api'),
-    tools = require('../utils/tools'),
-    Header = require('../components/Header.react'),
-    Footer = require('../components/Footer.react'),
-    WechatLayer = require('../components/WechatLayer.react'),
-    InfiniteScroll = require('../components/InfiniteScroll.react'),
-    Link = require('react-router').Link,
-    DocumentTitle = require('react-document-title');
+import React, { Component } from 'react'
+import _ from 'lodash'
+import { Link } from 'react-router'
+import DocumentTitle from 'react-document-title'
 
-var Home = React.createClass({
+import tools from '../utils/tools'
+import api from '../data/api'
+import {
+  WechatLayer,
+  Header,
+  Footer,
+  InfiniteScroll
+} from '../components'
+
+const Home = React.createClass({
   statics: {
     routeName: 'Home'
   },
@@ -21,12 +24,12 @@ var Home = React.createClass({
   },
 
   _load_user: function (uid) {
-    api.user_data({id: uid, type: 2, page: 1, size: 9}).then(function(response) {
+    api.user_data({id: uid, type: 2, page: 1, size: 9}).then(response => {
       if (this.isMounted()) {
         if (!response) return;
         
-        var userData = response.objects.data;
-        var this_title = userData.Nickname + "的个人主页 | " + tools.APP_SLOGAN;
+        let userData = response.objects.data;
+        let this_title = userData.Nickname + "的个人主页 | " + tools.APP_SLOGAN;
         this.setState({
           title: this_title,
           avatar: userData.Avatar,
@@ -70,13 +73,13 @@ var Home = React.createClass({
   },
 
   componentDidMount() {
-    var uid = this.props.params.uid || 15;
+    let uid = this.props.params.uid || 15;
     this._load_user(uid);
     
   },
 
   render() {
-    var pics = this.state.piclist,
+    let pics = this.state.piclist,
         user_id = this.props.params.uid || 15;
 
     return (

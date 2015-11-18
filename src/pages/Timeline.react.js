@@ -1,16 +1,19 @@
-var React = require('react'),
-    _ = require('lodash'),
-    api = require('../data/api'),
-    tools = require('../utils/tools'),
-    Link = require('react-router').Link,
-    Picture = require('../components/Picture.react'),
-    Swipeable = require('react-swipeable'),
-    DocumentTitle = require('react-document-title');
+import React, { Component } from 'react'
+import _ from 'lodash'
+import { Link } from 'react-router'
+import DocumentTitle from 'react-document-title'
+import Swipeable from 'react-swipeable'
 
-var SWIPE_AT_LEAST = 20,
+import tools from '../utils/tools'
+import api from '../data/api'
+import {
+  Picture
+} from '../components'
+
+const SWIPE_AT_LEAST = 20,
     PAGE_COUNT = 9;
 
-var Timeline = React.createClass({
+const Timeline = React.createClass({
   statics: {
     routeName: 'Timeline'
   },
@@ -29,7 +32,7 @@ var Timeline = React.createClass({
       if (this.isMounted()) {
         if (!response) return;
         
-        var userData = response.objects.data,
+        let userData = response.objects.data,
             this_title = userData.Nickname + "的时间线 | " + tools.APP_SLOGAN,
             cur_piclist = this.state.piclist || [],
             cur_page = this.state.current_page;
@@ -146,20 +149,20 @@ var Timeline = React.createClass({
   },
 
   render() {
-    var pics = this.state.piclist,
+    let pics = this.state.piclist,
         user_id = this.props.params.uid || 15,
         pic_index = 0,
         cur_index = this.state.currentIndex,
         swipe_at_least = SWIPE_AT_LEAST;
 
-    var placeholder_image_class = "timeline-item timeline-item--placeholder";
+    let placeholder_image_class = "timeline-item timeline-item--placeholder";
     if (!this.state.has_more && this.state.loaded_count == 2 && this.state.loaded_count == 1) {
       placeholder_image_class += " timeline-item--right";
     } else if (!this.state.has_more && this.state.loaded_count === 0) {
       placeholder_image_class += " timeline-item--current";
     }
 
-    var timeline = this;
+    let timeline = this;
     return (
       <DocumentTitle title={this.state.title || 'KIZZ'}>
         <div className="main timeline">
@@ -184,7 +187,7 @@ var Timeline = React.createClass({
                   {
                     _.chain(pics)
                     .uniq()
-                    .map(function(pic) {
+                    .map(pic => {
                       var pid = pic.PicId,
                           pic_url = tools.get_image_url(pic.Image, pic.Type);
                       var item_class = "timeline-item";

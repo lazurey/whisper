@@ -1,10 +1,11 @@
-var React = require('react'),
-    tools = require('../utils/tools'),
-    WechatLayer = require('../components/WechatLayer.react'),
-    Link = require('react-router').Link,
-    DocumentTitle = require('react-document-title');
+import React, { Component } from 'react'
+import { Link } from 'react-router'
+import DocumentTitle from 'react-document-title'
 
-var AppDownload = React.createClass({
+import tools from '../utils/tools'
+import WechatLayer from '../components/WechatLayer.react'
+
+const AppDownload = React.createClass({
   statics: {
     routeName: 'AppDownload'
   },
