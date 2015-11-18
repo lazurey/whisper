@@ -1,7 +1,7 @@
 'use strict';
 
-var BASE_URL = 'http://api.realyoung.net';
-var BASE_AUTH_KEY = 'tbMG2VEO5sBLFpmZ/7snYsx0uzYHPRFNlRtLHNCThsz6ytXXrqE06klNx28phvCM7Wq5ui7wLElYT0XrucpxWhtZCY+8dzAjc9aGEBpabsA=';
+const BASE_URL = 'http://api.realyoung.net';
+const BASE_AUTH_KEY = 'tbMG2VEO5sBLFpmZ/7snYsx0uzYHPRFNlRtLHNCThsz6ytXXrqE06klNx28phvCM7Wq5ui7wLElYT0XrucpxWhtZCY+8dzAjc9aGEBpabsA=';
 
 var _ = require('lodash');
 var request = require('superagent');

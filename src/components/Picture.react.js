@@ -1,13 +1,12 @@
-var React = require('react'),
-    api = require('../data/api'),
-    _ = require('lodash'),
-    tools = require('../utils/tools'),
-    Comment = require('../components/Comment.react'),
-    Link = require('react-router').Link;
+import React from 'react'
+import _ from 'lodash'
+import { Link } from 'react-router'
 
-var PAGE_COUNT = 9;
+import tools from '../utils/tools'
+import api from '../data/api'
+import Comment from '../components/Comment.react'
 
-var Likes = React.createClass({
+const Likes = React.createClass({
   getDefaultProps() {
     return {
       likes: []
@@ -15,14 +14,14 @@ var Likes = React.createClass({
   },
 
   render() {
-    var likes = _.take(this.props.likes, 3) || [];
-    var like_total = likes.length;
+    let likes = _.take(this.props.likes, 3) || [];
+    let like_total = likes.length;
     return <div>
               <ul className="bo-list">
                 {
                   _.chain(likes)
                     .uniq()
-                    .map(function(like) {
+                    .map(like => {
                       if (!like) return;
                       return <li className="bo-item">
                               <Link to="/">
@@ -64,11 +63,11 @@ var Picture = React.createClass({
   },
 
   _load_pic_data: function(pid) {
-    api.pic_data({id: pid}).then(function(response) {
+    api.pic_data({id: pid}).then(response => {
       if (this.isMounted()) {
         if (!response) return;
-        var data = response.objects.data;
-        var create_date = data.CreateDate;
+        let data = response.objects.data;
+        let create_date = data.CreateDate;
         create_date = create_date.match(/(.*)T/i);
         create_date = (create_date && create_date.length > 0) ? create_date[1] : "";
 
@@ -85,7 +84,7 @@ var Picture = React.createClass({
   },
 
   render() {
-    var comment_list = this.state.comment_list,
+    let comment_list = this.state.comment_list,
         like_list = this.state.like_list;
 
     return (

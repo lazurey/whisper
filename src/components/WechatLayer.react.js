@@ -1,8 +1,8 @@
-var React = require('react'),
-    tools = require('../utils/tools'),
-    Link = require('react-router').Link;
+import React from 'react'
+import tools from '../utils/tools'
+import { Link } from 'react-router'
 
-var WechatLayer = React.createClass({
+const WechatLayer = React.createClass({
   getDefaultProps() {
     return {
       show: false
@@ -28,7 +28,7 @@ var WechatLayer = React.createClass({
   },
 
   render() {
-    var show_style = (this.props.show && this.state.show) ? "wechat-layer" : "wechat-layer wechat-layer--hidden";
+    let show_style = (this.props.show && this.state.show) ? "wechat-layer" : "wechat-layer wechat-layer--hidden";
     return (
         <div className={show_style}>
           <div className="arrow">

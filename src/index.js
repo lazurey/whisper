@@ -39,6 +39,6 @@ const rootRoutes = (
 );
 
 run(rootRoutes, function (Handler, state) {
-  var params = state.params;
+  let params = state.params;
   React.render(<Handler params={params} />, document.body);
 });

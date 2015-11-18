@@ -1,9 +1,9 @@
-var React = require('react'),
-    tools = require('../utils/tools'),
-    WechatLayer = require('./WechatLayer.react'),
-    Link = require('react-router').Link;
+import React from 'react'
+import tools from '../utils/tools'
+import WechatLayer from './WechatLayer.react'
+import { Link } from 'react-router'
 
-var Footer = React.createClass({
+const Footer = React.createClass({
 
   getInitialState() {
     return {

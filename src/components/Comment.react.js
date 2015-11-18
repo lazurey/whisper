@@ -1,29 +1,30 @@
-var React = require('react'),
-    _ = require('lodash'),
-    Link = require('react-router').Link;
+import React, { Component } from 'react'
+import _ from 'lodash'
+import { Link } from 'react-router'
 
-var Comment = React.createClass({
+export default class Comment extends Component {
 
   getDefaultProps() {
     return {
       comments: []
     }
-  },
+  }
 
   render() {
-    var comments = this.props.comments || [];
+    let comments = this.props.comments || [];
     return <div className="pic-share__comment">
             <ul>
               {
                 _.chain(comments)
                   .uniq()
-                  .map(function(comment) {
+                  .map(comment => {
                     if (!comment) return;
+                    let content = (comment.ToNickname) ? "回复" + (comment.ToNickname) + "：" : "";
                     return <li className="pic-share__comment-item">
                             <Link to="person" params={{uid: comment.AccountId}}>
                               <p>
                                 <span className="comment__user">{comment.Nickname}</span>：
-                                <span className="comment__content">{comment.Content}</span>
+                                <span className="comment__content">{content}{comment.Content}</span>
                               </p>
                             </Link>
                           </li>;
@@ -33,6 +34,4 @@ var Comment = React.createClass({
             </ul>
           </div>
   }
-});
-
-module.exports = Comment;
+}
