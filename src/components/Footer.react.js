@@ -1,21 +1,20 @@
-import React from 'react'
+import React, { Component } from 'react'
 import tools from '../utils/tools'
 import WechatLayer from './WechatLayer.react'
 import { Link } from 'react-router'
 
-const Footer = React.createClass({
 
-  getInitialState() {
-    return {
-      showLayer: false
-    }
-  },
+export default class Footer extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {showLayer: false};
+  }
 
   _handleClick() {
     this.setState({
       showLayer: tools.is_wechat()
     });
-  },
+  }
 
   render() {
     return (
@@ -38,6 +37,4 @@ const Footer = React.createClass({
         </div>
     );
   }
-});
-
-module.exports = Footer;
+}

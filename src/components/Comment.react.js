@@ -4,12 +4,6 @@ import { Link } from 'react-router'
 
 export default class Comment extends Component {
 
-  getDefaultProps() {
-    return {
-      comments: []
-    }
-  }
-
   render() {
     let comments = this.props.comments || [];
     return <div className="pic-share__comment">
@@ -35,3 +29,7 @@ export default class Comment extends Component {
           </div>
   }
 }
+
+Comment.defaultProps =  {
+  comments: []
+};

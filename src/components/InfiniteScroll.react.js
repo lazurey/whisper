@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import _ from 'lodash'
 import { Link } from 'react-router'
 
@@ -7,24 +7,21 @@ import api from '../data/api'
 
 const PAGE_COUNT = 9;
 
-const InfiniteScroll = React.createClass({
+export default class InfiniteScroll extends Component {
   
-  getInitialState() {
-    return {
+  constructor(props) {
+    super(props);
+    this.state = {
       page: 1,
       hasMore: true,
       isLoading: false,
       loadClass: "btn-loading",
-      piclist: []
-    }
-  },
+      piclist: [],
+      isMounted: false
+    };
 
-  getDefaultProps() {
-    return {
-      api: "hot_pics",
-      uid: 0
-    }
-  },
+    this.handleScroll = this.handleScroll.bind(this);
+  }
 
   _get_pics() {
     let api_str = this.props.api || "hot_pics";
@@ -32,7 +29,7 @@ const InfiniteScroll = React.createClass({
 
     if (api_str === "hot_pics") {
       api.hot_pics({page: current_page, size: PAGE_COUNT}).then(response => {
-        if (this.isMounted()) {
+        if (this.state.isMounted) {
           if (!response) return;
           let currentPics = this.state.piclist;
           let data = response.objects.data;
@@ -57,7 +54,7 @@ const InfiniteScroll = React.createClass({
         new_pager = (window.screen.height > 500) ? current_page + 2 : current_page + 1;
       }
       api.user_data({id: this.props.uid, type: 0, page: current_page, size: load_count}).then(response => {
-        if (this.isMounted()) {
+        if (this.state.isMounted) {
           if (!response) return;
           
           let currentPics = this.state.piclist;
@@ -75,7 +72,33 @@ const InfiniteScroll = React.createClass({
         }
       }.bind(this));
     }
-  },
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.handleScroll);
+    this.setState({isMounted: false});
+  }
+
+  componentDidMount() {
+    window.addEventListener('scroll', this.handleScroll);
+
+    if (!this.state.isLoading) {
+      this.setState({ isLoading: true, loadClass: "btn-loading btn-loading__show", isMounted: true});
+      this._get_pics();
+    }
+  }
+
+  _load_more_items() {
+    if (!this.state.hasMore) return;
+    this.setState({ isLoading: true, loadClass: "btn-loading btn-loading__show"});
+    this._get_pics();
+  }
+
+  _show_heading() {
+    if (this.props.api === "hot_pics") {
+      return <div className="hot-pic__title"><h2>热门精选</h2></div>
+    }
+  }
 
   handleScroll(event) {
     if (!this.state.hasMore) {
@@ -90,32 +113,7 @@ const InfiniteScroll = React.createClass({
     if (down_enough && !this.state.isLoading) {
       this._load_more_items();
     }
-  },
-
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.handleScroll);
-  },
-
-  componentDidMount() {
-    window.addEventListener('scroll', this.handleScroll);
-
-    if (!this.state.isLoading) {
-      this.setState({ isLoading: true, loadClass: "btn-loading btn-loading__show"});
-      this._get_pics();
-    }
-  },
-
-  _load_more_items() {
-    if (!this.state.hasMore) return;
-    this.setState({ isLoading: true, loadClass: "btn-loading btn-loading__show"});
-    this._get_pics();
-  },
-
-  _show_heading() {
-    if (this.props.api === "hot_pics") {
-      return <div className="hot-pic__title"><h2>热门精选</h2></div>
-    }
-  },
+  }
 
   render() {
     let pics = this.state.piclist,
@@ -151,6 +149,11 @@ const InfiniteScroll = React.createClass({
       </div>
     );
   }
-});
 
-module.exports = InfiniteScroll;
+}
+
+InfiniteScroll.defaultProps = {
+  api: "hot_pics",
+  uid: 0
+}
+
