@@ -8,6 +8,11 @@ import Comment from '../components/Comment.react'
 
 
 class Likes extends Component {
+
+  static defaultProps = {
+    likes: []
+  }
+  
   render() {
     let likes = _.take(this.props.likes, 3) || [];
     let like_total = likes.length;
@@ -32,10 +37,6 @@ class Likes extends Component {
   }
 }
 
-Likes.defaultProps = {
-  likes: []
-}
-
 export default class Picture extends Component {
 
   constructor(props) {
@@ -49,6 +50,10 @@ export default class Picture extends Component {
       create_date: "",
       like_total: 0
     };
+  }
+
+  static defaultProps = {
+    pid: "1851"
   }
 
   componentDidMount() {
@@ -90,7 +95,3 @@ export default class Picture extends Component {
   }
 
 }
-
-Picture.defaultProps = {
-  pid: "1851"
-};

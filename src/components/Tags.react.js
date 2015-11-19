@@ -6,6 +6,11 @@ const changeDate = new Date(2015, 9, 31);
 
 export default class Tags extends Component {
 
+  static defaultProps = {
+    taglist: [],
+    date: "20151101"
+  }
+
   _checkDate(dateStr) {
     let year = parseInt(dateStr.slice(0, 4)),
         month = parseInt(dateStr.slice(4, 6)) - 1,
@@ -50,9 +55,4 @@ export default class Tags extends Component {
               }
           </div>
   }
-}
-
-Tags.defaultProps = {
-  taglist: [],
-  date: "20151101"
 }

@@ -12,20 +12,53 @@ import {
   InfiniteScroll
 } from '../components'
 
-const Home = React.createClass({
-  statics: {
+export default class Home extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showLayer: false,
+      title: tools.APP_SLOGAN,
+      avatar: "",
+      nickname: "",
+      info: "",
+      liked: "",
+      fans: "",
+      follow: "",
+      isMounted: false,
+      piclist: []
+    }
+    this._handleClick = this._handleClick.bind(this);
+  }
+
+  static statics = {
     routeName: 'Home'
-  },
+  }
+
+  static defaultProps = {
+    routeName: 'Home' 
+  }
+
+  componentWillUpdate(nextProps, nextState) {
+    if (nextProps.params.uid !== this.props.params.uid) {
+      this._load_user(nextProps.params.uid);
+    }
+  }
+
+  componentDidMount() {
+    let uid = this.props.params.uid || 15;
+    this._load_user(uid);
+    this.setState({ isMounted: true });
+  }
 
   _handleClick() {
     this.setState({
       showLayer: tools.is_wechat()
     });
-  },
+  }
 
-  _load_user: function (uid) {
+  _load_user(uid) {
     api.user_data({id: uid, type: 2, page: 1, size: 9}).then(response => {
-      if (this.isMounted()) {
+      if (this.state.isMounted) {
         if (!response) return;
         
         let userData = response.objects.data;
@@ -44,39 +77,7 @@ const Home = React.createClass({
         tools.update_wx_title(this_title);
       }
     }.bind(this));
-  },
-
-  getDefaultProps() {
-    return {
-      routeName: 'Home'
-    }
-  },
-
-  getInitialState() {
-    return {
-      showLayer: false,
-      title: "粑粑麻麻你们别输在起跑线上哟 发自KIZZ APP",
-      avatar: "",
-      nickname: "",
-      info: "",
-      liked: "",
-      fans: "",
-      follow: "",
-      piclist: []
-    }
-  },
-
-  componentWillUpdate(nextProps, nextState) {
-    if (nextProps.params.uid !== this.props.params.uid) {
-      this._load_user(nextProps.params.uid);
-    }
-  },
-
-  componentDidMount() {
-    let uid = this.props.params.uid || 15;
-    this._load_user(uid);
-    
-  },
+  }
 
   render() {
     let pics = this.state.piclist,
@@ -128,6 +129,4 @@ const Home = React.createClass({
       </DocumentTitle>
     );
   }
-});
-
-module.exports = Home;
+}

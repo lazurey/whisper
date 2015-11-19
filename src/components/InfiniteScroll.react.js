@@ -23,6 +23,11 @@ export default class InfiniteScroll extends Component {
     this.handleScroll = this.handleScroll.bind(this);
   }
 
+  static defaultProps = {
+    api: "hot_pics",
+    uid: 0
+  }
+
   _get_pics() {
     let api_str = this.props.api || "hot_pics";
     let current_page = this.state.page;
@@ -150,10 +155,5 @@ export default class InfiniteScroll extends Component {
     );
   }
 
-}
-
-InfiniteScroll.defaultProps = {
-  api: "hot_pics",
-  uid: 0
 }
 

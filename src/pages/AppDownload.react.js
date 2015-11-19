@@ -5,29 +5,22 @@ import DocumentTitle from 'react-document-title'
 import tools from '../utils/tools'
 import WechatLayer from '../components/WechatLayer.react'
 
-const AppDownload = React.createClass({
-  statics: {
-    routeName: 'AppDownload'
-  },
+export default class AppDownload extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      showLayer: false,
+      title: tools.APP_SLOGAN
+    }
+
+    this._handleClick = this._handleClick.bind(this);
+  }
 
   _handleClick() {
     this.setState({
       showLayer: tools.is_wechat()
     });
-  },
-
-  getDefaultProps() {
-    return {
-      routeName: 'AppDownload'
-    }
-  },
-
-  getInitialState() {
-    return {
-      showLayer: false,
-      title: tools.APP_SLOGAN
-    }
-  },
+  }
 
   render() {
     return (
@@ -76,6 +69,12 @@ const AppDownload = React.createClass({
       </DocumentTitle>
     );
   }
-});
+}
 
-module.exports = AppDownload;
+AppDownload.statics = {
+  routeName: 'AppDownload'
+}
+
+AppDownload.defaultProps = {
+  routeName: 'AppDownload'
+}
