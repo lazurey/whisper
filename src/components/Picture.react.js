@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import _ from 'lodash'
 import { Link } from 'react-router'
 
@@ -6,13 +6,8 @@ import tools from '../utils/tools'
 import api from '../data/api'
 import Comment from '../components/Comment.react'
 
-const Likes = React.createClass({
-  getDefaultProps() {
-    return {
-      likes: []
-    }
-  },
 
+class Likes extends Component {
   render() {
     let likes = _.take(this.props.likes, 3) || [];
     let like_total = likes.length;
@@ -35,13 +30,17 @@ const Likes = React.createClass({
               </ul>
             </div>
   }
+}
 
-});
+Likes.defaultProps = {
+  likes: []
+}
 
-var Picture = React.createClass({
-  
-  getInitialState() {
-    return {
+export default class Picture extends Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
       page: 1,
       image: "",
       type: "",
@@ -49,20 +48,14 @@ var Picture = React.createClass({
       list_list: [],
       create_date: "",
       like_total: 0
-    }
-  },
-
-  getDefaultProps() {
-    return {
-      pid: "1851"
-    }
-  },
+    };
+  }
 
   componentDidMount() {
     this._load_pic_data(this.props.pid);
-  },
+  }
 
-  _load_pic_data: function(pid) {
+  _load_pic_data(pid) {
     api.pic_data({id: pid}).then(response => {
       if (this.isMounted()) {
         if (!response) return;
@@ -81,7 +74,7 @@ var Picture = React.createClass({
         });
       }
     }.bind(this));
-  },
+  }
 
   render() {
     let comment_list = this.state.comment_list,
@@ -95,6 +88,9 @@ var Picture = React.createClass({
       </div>
     );
   }
-});
 
-module.exports = Picture;
+}
+
+Picture.defaultProps = {
+  pid: "1851"
+};

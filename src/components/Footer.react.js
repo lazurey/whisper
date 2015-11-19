@@ -8,6 +8,7 @@ export default class Footer extends Component {
   constructor(props) {
     super(props);
     this.state = {showLayer: false};
+    this._handleClick = this._handleClick.bind(this);
   }
 
   _handleClick() {

@@ -1,17 +1,10 @@
-import React from 'react'
+import React, { Component } from 'react'
 import _ from 'lodash'
 import { Link } from 'react-router'
 
 const changeDate = new Date(2015, 9, 31);
 
-const Tags = React.createClass({
-
-  getDefaultProps() {
-    return {
-      taglist: [],
-      date: "20151101"
-    }
-  },
+export default class Tags extends Component {
 
   _checkDate(dateStr) {
     let year = parseInt(dateStr.slice(0, 4)),
@@ -19,7 +12,7 @@ const Tags = React.createClass({
         day = parseInt(dateStr.slice(6, 8));
     let createDate = new Date(year, month, day);
     return (createDate > changeDate);
-  },
+  }
 
   _getPosition(x, y) {
     if (this._checkDate(this.props.date)) {
@@ -29,7 +22,7 @@ const Tags = React.createClass({
       y = baseWidth / y;
     }
     return {"left": x, "top": y};
-  },
+  }
 
   render() {
     let taglist = this.props.taglist || [];
@@ -57,6 +50,9 @@ const Tags = React.createClass({
               }
           </div>
   }
-});
+}
 
-module.exports = Tags;
+Tags.defaultProps = {
+  taglist: [],
+  date: "20151101"
+}
