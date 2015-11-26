@@ -48,7 +48,8 @@ export default class Picture extends Component {
       comment_list: [],
       list_list: [],
       create_date: "",
-      like_total: 0
+      like_total: 0,
+      isMounted: false
     };
   }
 
@@ -57,12 +58,13 @@ export default class Picture extends Component {
   }
 
   componentDidMount() {
+    this.setState({isMounted: true});
     this._load_pic_data(this.props.pid);
   }
 
   _load_pic_data(pid) {
     api.pic_data({id: pid}).then(response => {
-      if (this.isMounted()) {
+      if (this.state.isMounted) {
         if (!response) return;
         let data = response.objects.data;
         let create_date = data.CreateDate;
