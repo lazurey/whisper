@@ -95,7 +95,7 @@ const PicShare = React.createClass({
 
   render() {
     let comment_list = this.state.comments;
-    let like_list = this.state.likeList;
+    let like_list = _.take(this.state.likeList, 3);
     return (
       <DocumentTitle title={this.state.title || 'KIZZ'}>
         <div className="main">
@@ -122,8 +122,7 @@ const PicShare = React.createClass({
             <div className="pic-share__share">
               <p>{this.state.content}</p>
               <div className="pure-g">
-                <div className="pic-share__kizz pure-u-4-24"><span className="kizz"></span><span className="kizz-text">啵</span></div>
-                <div className="pure-u-18-24">
+                <div className="pure-u-20-24">
                   <ul className="share-user__list">
                     {
                       _.chain(like_list)
@@ -137,11 +136,10 @@ const PicShare = React.createClass({
                         })
                         .value()
                     }
+                    <li><span className="pic-share__count">{this.state.liked}</span></li>
                   </ul>
                 </div>
-                <div className="pure-u-2-24">
-                  <div className="pic-share__count">{this.state.liked}</div>
-                </div>
+                <div className="pic-share__kizz pure-u-4-24"><span className="kizz"></span><span className="kizz-text">啵</span></div>
               </div>
             </div>
             <Comment comments={comment_list} />
