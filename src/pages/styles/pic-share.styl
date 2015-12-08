@@ -91,6 +91,16 @@
   }
 }
 
+.pic-share__likes--none {
+  .pic-share__count {
+    background: $color-muted;
+  }
+  .pic-share__kizz {
+    filter: grayscale(100%);
+    -webkit-filter: grayscale(100%);
+  }
+}
+
 @media screen and (max-width: $screen-mid) {
   .pic-share__kizz {
     .kizz-text {
@@ -135,9 +145,6 @@
 }
 
 .pic-share__comment-item {
-  .comment__user {
-
-  }
   .comment__content {
     color: $color-muted;
   }

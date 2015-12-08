@@ -113,6 +113,7 @@ const PicShare = React.createClass({
   render() {
     let comment_list = this.state.comments;
     let like_list = _.take(this.state.likeList, 3);
+    let like_count_class = (like_list.length === 0) ? "pure-g pic-share__likes--none" : "pure-g";
     return (
       <DocumentTitle title={this.state.title || 'KIZZ'}>
         <div className="main">
@@ -137,7 +138,7 @@ const PicShare = React.createClass({
             </div>
             <div className="pic-share__share">
               <p>{this.state.content}</p>
-              <div className="pure-g">
+              <div className={like_count_class}>
                 <div className="pure-u-20-24">
                   <ul className="share-user__list">
                     {
