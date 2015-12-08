@@ -24,7 +24,6 @@ const PicShare = React.createClass({
         if (!response) return;
         
         let data = response.objects.data;
-        // console.log(data);
         let this_title = data.Nickname + "的照片 | " + tools.APP_SLOGAN;
 
         this.setState({
@@ -44,6 +43,19 @@ const PicShare = React.createClass({
         });
 
         tools.update_wx_title(this_title);
+      }
+    }.bind(this));
+  },
+
+  _load_user(uid) {
+    api.user_data({id: uid, type: 2, page: 1, size: 1}).then(response => {
+      if (this.isMounted()) {
+        if (!response) return;
+        let userData = response.objects.data;
+        this.setState({
+          likedTotal: userData.LikeCount
+        });
+
       }
     }.bind(this));
   },
@@ -74,6 +86,7 @@ const PicShare = React.createClass({
       avatar: "",
       nickname: "",
       liked: "",
+      likedTotal: 0,
       content: "",
       replies: 0,
       comments: [],
@@ -86,11 +99,15 @@ const PicShare = React.createClass({
     if (nextProps.params.pid !== this.props.params.pid) {
       this._load_picture(nextProps.params.pid);
     }
+    if (nextProps.params.uid !== this.props.params.uid) {
+      this._load_user(nextProps.params.uid);
+    }
   },
 
   componentWillMount() {
     let pid = this.props.params.pid;
     this._load_picture(pid);
+    this._load_user(this.props.params.uid);
   },
 
   render() {
@@ -109,10 +126,9 @@ const PicShare = React.createClass({
               </div>
               <div className="pic-share__info">
                 <h3><Link to="person" params={{uid: this.state.uid}}>{this.state.nickname}</Link></h3>
-                <div className="pic-share__times"><span className="kizz kizz--small"></span>总数<span>{this.state.liked}</span>次</div>
               </div>
               <div className="pic-share__follow">
-                <a target="_blank" className="btn btn-primary" onClick={this._handleClick} href={tools.APP_URL}><span className="follow__plus">+</span> 关注</a>
+                <div className="pic-share__times"><span>{this.state.likedTotal}</span>啵</div>
               </div>
             </div>
             <div className="pic-share__pic">
